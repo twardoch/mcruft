@@ -73,7 +73,9 @@ python3 -c "import mcruft; print([(e.name, e.available) for e in mcruft.engines(
 `mcruft[engines]` installs the core and all five engine packages.
 Every distribution provides an `all` extra. `mcruft[all]` includes all engines,
 MCP, PDF/SVG/PSD libraries, each engine's bundled CLI and the PdfCraft native binding.
-Once all distributions are published, install everything with:
+The bundled CLI and native wheels are macOS arm64 only (no sdist), so `mcruft[all]` fails to
+resolve on other platforms rather than silently dropping them; use `mcruft[engines]` there and
+put the CLIs on PATH. Once all distributions are published, install everything with:
 
 ```bash
 uv pip install --system 'mcruft[all]'
