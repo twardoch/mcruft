@@ -79,7 +79,8 @@ Once all distributions are published, install everything with:
 uv pip install --system 'mcruft[all]'
 ```
 
-Until then, build the binary wheels with `tools/bundle_cli.py` and the native wheel
+Until then, build the binary wheels with `tools/bundle_cli.py <product> --binary <cli> --license-dir <unzipped release>`
+(the official CLI zip minus the binary supplies the licence files) and the native wheel
 with `maturin build -i python3 --manifest-path native/mcruft_pdfcraft_native/Cargo.toml --out dist`.
 Run `./install.sh` to include those local wheels (it searches `dist/` when present). Without them,
 installation fails rather than silently dropping dependencies. `install.sh` uses

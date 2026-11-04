@@ -14,6 +14,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from datetime import UTC, datetime
@@ -28,6 +29,9 @@ PACKAGES = (
     "mcruft-photocraft",
     "mcruft-vectorcraft",
 )
+# PyPI's JSON view can lag an accepted upload by a minute or more.
+VERIFY_ATTEMPTS = 6
+VERIFY_DELAY = 30
 
 
 def remote_files(name: str, version: str) -> dict[str, str]:
@@ -136,18 +140,23 @@ def main(argv: list[str] | None = None) -> int:
         code = publish(report, args.dist)
         report["upload_exit_code"] = code
         args.report.write_text(json.dumps(report, indent=2) + "\n")
-        verified = plan(args.dist, args.version)
-        verified["upload_exit_code"] = code
-        args.report.write_text(json.dumps(verified, indent=2) + "\n")
+        for attempt in range(1, VERIFY_ATTEMPTS + 1):
+            verified = plan(args.dist, args.version)
+            verified["upload_exit_code"] = code
+            args.report.write_text(json.dumps(verified, indent=2) + "\n")
+            pending = any(file["state"] == "pending" for file in verified["files"])
+            if code or not pending or attempt == VERIFY_ATTEMPTS:
+                break
+            time.sleep(VERIFY_DELAY)
         if code:
             print(
                 "Upload stopped. Read the uv error; respect Retry-After if provided.",
                 file=sys.stderr,
             )
             return code
-        if any(file["state"] == "pending" for file in verified["files"]):
+        if pending:
             raise ValueError("Upload returned success but PyPI does not yet confirm every file")
-        print("All 12 release files verified against PyPI SHA-256.")
+        print(f"All {len(verified['files'])} release files verified against PyPI SHA-256.")
         return 0
     except (ValueError, OSError, urllib.error.URLError) as error:
         print(f"Cannot resume: {error}", file=sys.stderr)

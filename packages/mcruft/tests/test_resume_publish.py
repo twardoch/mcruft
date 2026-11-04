@@ -145,3 +145,36 @@ def test_main_records_partial_upload_failure(tool, artifacts, tmp_path, monkeypa
         == 2
     )
     assert json.loads(report_path.read_text())["upload_exit_code"] == 2
+
+
+def test_main_when_pypi_json_lags_then_waits_and_verifies(tool, artifacts, tmp_path, monkeypatch):
+    digest = hashlib.sha256(b"artifact").hexdigest()
+    lagging_passes = 3  # preflight plan plus two post-upload checks see nothing
+    calls = {"n": 0}
+
+    def remote(name, version):
+        calls["n"] += 1
+        if calls["n"] <= lagging_passes * len(tool.PACKAGES):
+            return {}
+        stem = f"{name.replace('-', '_')}-{version}"
+        return {f"{stem}-py3-none-any.whl": digest, f"{stem}.tar.gz": digest}
+
+    sleeps = []
+    monkeypatch.setattr(tool, "remote_files", remote)
+    monkeypatch.setattr(tool, "publish", lambda *args: 0)
+    monkeypatch.setattr(tool.time, "sleep", sleeps.append)
+    args = ["--dist", str(artifacts), "--report", str(tmp_path / "r.json"), "--publish"]
+    assert tool.main(args) == 0, "lagging PyPI JSON must not be reported as failure"
+    assert len(sleeps) == 2, f"expected two waits before verification, got {sleeps}"
+
+
+def test_main_when_pypi_never_confirms_then_fails_after_bounded_waits(
+    tool, artifacts, tmp_path, monkeypatch
+):
+    sleeps = []
+    monkeypatch.setattr(tool, "remote_files", lambda name, version: {})
+    monkeypatch.setattr(tool, "publish", lambda *args: 0)
+    monkeypatch.setattr(tool.time, "sleep", sleeps.append)
+    args = ["--dist", str(artifacts), "--report", str(tmp_path / "r.json"), "--publish"]
+    assert tool.main(args) == 1
+    assert len(sleeps) == tool.VERIFY_ATTEMPTS - 1, "waits must be bounded"

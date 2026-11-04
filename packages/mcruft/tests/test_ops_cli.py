@@ -9,6 +9,7 @@ from PIL import Image
 from pptx import Presentation
 from pptx.util import Pt
 from pypdf import PdfReader
+from pypdf.generic import StreamObject
 
 
 def embeds_fonts(path) -> bool:
@@ -20,9 +21,11 @@ def embeds_fonts(path) -> bool:
             font = font.get_object()
             if "/DescendantFonts" in font:
                 font = font["/DescendantFonts"][0].get_object()
-            descriptor = font.get("/FontDescriptor")
-            if descriptor and any(k.startswith("/FontFile") for k in descriptor.get_object()):
-                return True
+            descriptor = font.get("/FontDescriptor") or {}
+            descriptor = descriptor.get_object() if descriptor else {}
+            for key, value in descriptor.items():
+                if key.startswith("/FontFile") and isinstance(value.get_object(), StreamObject):
+                    return True
     return False
 
 
