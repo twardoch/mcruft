@@ -4,6 +4,35 @@ this_file: WORK.md
 
 # Work status
 
+## 0.1.3 preparation and new-project upload (2026-11-04)
+
+- PR #4 (squash `ae34507` on main): root metadata + `all` extras, licensed CLI bundles,
+  native 0.1.0 with 112 licence files (incl. portable-atomic after review), bounded
+  post-upload wait in `resume_publish.py`, PDF-parsing font check. CI and Sourcery green;
+  4 Sourcery findings fixed, 4 local-attacker hardening findings declined.
+- Gates: ruff clean; 204 passed both without and with the native binding installed.
+- New-project upload, one attempt (`UV_HTTP_RETRIES=0`): `mcruft-deckcraft-bin` 0.10.0 and
+  `mcruft-designcraft-bin` 0.12.0 published, SHA-256 verified. Then HTTP 429 "Too many new
+  projects created". PdfCraft/PhotoCraft/VectorCraft bins and native are absent. Stopped.
+- **0.1.3 not tagged or published**, since `mcruft[all]` would not resolve yet. The exact
+  wheels are preserved in `.cache/publish-new-0.1.3/` with `upload.sha256`.
+- Rate-limit observation, not a promise: both sessions got 429 right after the 4th new project
+  in a short window. If that holds, the four remaining fit in one later attempt.
+- `dist/`: the stale unlicensed native 0.0.0 wheel is replaced by the 0.1.0 one.
+- **Next upload** (`.cache/` exists only on this machine; `resume_publish.py` covers only the six
+  pure-Python packages, so use plain uv). Load credentials as in
+  `docs/handoffs/handoff-2026-10-26-0136.md` §6, never printing them, then:
+
+  ```bash
+  cd .cache/publish-new-0.1.3 && shasum -a 256 -c upload.sha256
+  UV_HTTP_RETRIES=0 uv publish --no-config --check-url https://pypi.org/simple/ \ --publish-url https://upload.pypi.org/legacy/ *.whl
+  ```
+
+  `--check-url` skips the two live wheels (and pdfcraft-bin, if uv's "Uploaded" line before
+  the 429 was real). Stop on 429. Verify all six hashes against PyPI JSON afterwards.
+- **Guard:** do not run `release.sh` or `publish.sh` until all four verify on PyPI. Pushing the
+  tag triggers `release.yml`, which publishes core 0.1.3 with an `all` extra pointing at them.
+
 ## 0.1.2 PyPI publication finished (2026-11-04)
 
 - Preview against `.cache/publish-resume-0.1.2`: 8 published, 4 pending; all 12 local
