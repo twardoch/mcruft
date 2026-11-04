@@ -60,14 +60,33 @@ then `PATH`. `engine.session()` opens the product's MCP server for interactive w
 
 ## Install
 
-The packages are not on PyPI yet. From a clone:
+`pip install "mcruft[engines]"` installs core and the five engine packages (`0.1.2` on PyPI).
+The CLIs themselves must be on PATH or set via `$MCRUFT_<PRODUCT>_CLI`.
+The newer `all` extras and binary/native distributions are not published yet.
+From a source clone:
 
 ```bash
-uv sync --all-packages --all-extras
-uv run python -c "import mcruft; print([(e.name, e.available) for e in mcruft.engines()])"
+./install.sh
+python3 -c "import mcruft; print([(e.name, e.available) for e in mcruft.engines()])"
 ```
 
-`mcruft[engines]` is the metapackage: it installs the core and all five engine packages.
+`mcruft[engines]` installs the core and all five engine packages.
+Every distribution provides an `all` extra. `mcruft[all]` includes all engines,
+MCP, PDF/SVG/PSD libraries, each engine's bundled CLI and the PdfCraft native binding.
+Once all distributions are published, install everything with:
+
+```bash
+uv pip install --system 'mcruft[all]'
+```
+
+Until then, build the binary wheels with `tools/bundle_cli.py` and the native wheel
+with `maturin build -i python3 --manifest-path native/mcruft_pdfcraft_native/Cargo.toml --out dist`.
+Run `./install.sh` to include those local wheels (it searches `dist/` when present). Without them,
+installation fails rather than silently dropping dependencies. `install.sh` uses
+`--no-config` so workspace exclusions cannot silently omit wheels.
+The workspace retains exclusions for unpublished wheels so `uv sync` can bootstrap
+source development; when installing `[all]` manually from inside this checkout,
+add `--no-config` too. Published package metadata contains no such exclusions.
 
 The ArtCraft CLIs (macOS) come from the ArtCraft releases. To bundle one into its own wheel,
 run `uv run python tools/bundle_cli.py <product>`. That writes a separate
@@ -87,9 +106,15 @@ These are not in the MVP:
 
 ## Development
 
-`./install.sh` installs all workspace packages and extras for development.
+`uv run python tools/resume_publish.py` previews a release's missing PyPI files; uploads require `--publish`.
+
+`uv pip install --system --upgrade -e .` installs the core from the repository root.
+`./install.sh` also installs all five local engines, MCP/library extras and development
+tools into the system Python. Use `uv sync --all-packages --all-extras` for an isolated workspace.
 `./build.sh` rebuilds six wheels and six sdists in `dist/` (no CLI bundles or native crate).
-Run `uv run ruff check .`, `uv run ruff format --check .` and `uv run pytest -q` before release.
+Run `uv run ruff check .`,
+`uv run ruff format --check .` and
+`uv run pytest -q` before release.
 `./release.sh [patch|minor|major]` gates a clean tree, stamps the changelog, commits/tags/pushes via gitnextver and uploads GitHub assets.
 `./publish.sh [patch|minor|major]` releases an untagged HEAD or checks a tagged HEAD, then builds and uploads to PyPI.
 Publishing uses `UV_PUBLISH_TOKEN` (or `PYPI_TOKEN` from `~/.env` when needed).

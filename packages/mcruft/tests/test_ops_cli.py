@@ -11,6 +11,21 @@ from pptx.util import Pt
 from pypdf import PdfReader
 
 
+def embeds_fonts(path) -> bool:
+    """True when any page font has an embedded font program (object streams hide raw bytes)."""
+    for page in PdfReader(path).pages:
+        resources = page.get("/Resources")
+        fonts = resources.get_object().get("/Font") if resources else None
+        for font in fonts.get_object().values() if fonts else ():
+            font = font.get_object()
+            if "/DescendantFonts" in font:
+                font = font["/DescendantFonts"][0].get_object()
+            descriptor = font.get("/FontDescriptor")
+            if descriptor and any(k.startswith("/FontFile") for k in descriptor.get_object()):
+                return True
+    return False
+
+
 @pytest.fixture
 def real_doc(tmp_path):
     available = {e.name for e in registry.discover() if e.available()}
@@ -47,11 +62,11 @@ def test_real_pdf_exports_and_convert_policies(real_doc, tmp_path):
         report = doc.export(out, policy=policy)
         assert report.op == "export" and report.outputs == [out]
         assert len(PdfReader(out).pages) == 3
-        assert (b"/FontFile" in out.read_bytes()) == (policy == "editable")
+        assert embeds_fonts(out) == (policy == "editable")
         pdf = tmp_path / f"converted-{policy}.pdf"
         converted = convert(deck, pdf)
         assert converted.outputs == [pdf] and len(PdfReader(pdf).pages) == 2
-        assert (b"/FontFile" in pdf.read_bytes()) == (policy == "editable")
+        assert embeds_fonts(pdf) == (policy == "editable")
     pdf = tmp_path / "converted-editable.pdf"
     for policy, convert in (
         ("editable", mcruft.convert_editable),
@@ -90,7 +105,7 @@ def test_real_save_previews_reopen(real_doc, tmp_path):
         assert asset.role == "preview" and asset.derived_from == page.source["asset"]
         assert asset.via["policy"] == "editable"
         assert len(PdfReader(asset.path).pages) == 1
-        assert b"/FontFile" in asset.path.read_bytes()
+        assert embeds_fonts(asset.path)
 
 
 def test_real_mixed_raster_document(real_doc, tmp_path):

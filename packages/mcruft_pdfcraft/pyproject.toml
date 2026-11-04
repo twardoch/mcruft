@@ -8,6 +8,8 @@ requires-python = ">=3.12"
 dependencies = ["mcruft", "pypdf"]
 
 [project.optional-dependencies]
+all = ["mcruft-pdfcraft[bundled,native]"]
+native = ["mcruft-pdfcraft-native[all]"]
 bundled = ["mcruft-pdfcraft-bin"]
 
 [project.entry-points."mcruft.engines"]

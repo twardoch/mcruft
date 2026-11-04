@@ -8,6 +8,7 @@ requires-python = ">=3.12"
 dependencies = ["mcruft", "pypdf"]
 
 [project.optional-dependencies]
+all = ["mcruft-vectorcraft[bundled]"]
 bundled = ["mcruft-vectorcraft-bin"]
 
 [project.entry-points."mcruft.engines"]

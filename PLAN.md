@@ -90,3 +90,18 @@ Tests run against the real CLIs, are skipped when a binary is missing, and write
 
 ### Task 7: Publish
 Quality gate (slop clean, verification, code review), README/CHANGELOG, push to GitHub.
+
+#### Publication recovery (done 2026-11-04)
+
+All six projects have verified `0.1.2` wheels and sdists on PyPI (steps 1–3 done;
+see `docs/handoffs/pypi-0.1.2-status-20261104.json`). Step 4 remains; `TODO.md` is the checklist.
+
+1. Preview `tools/resume_publish.py --dist .cache/publish-resume-0.1.2` and
+   compare the preserved artifact hashes with `docs/handoffs/pypi-0.1.2-artifacts.json`.
+2. With credentials loaded privately, make one `--publish` attempt. Respect 429
+   and any server retry deadline; never bump versions or change identities for quota.
+3. Verify all twelve files against PyPI hashes, then perform an isolated registry
+   install of `mcruft[engines]==0.1.2` from outside the source workspace.
+4. Treat the root-install and `all`-extra changes as a separate future stable release:
+   audit current edits, complete binary licences and platform checks, publish all
+   native/binary dependencies, and verify `mcruft[all]` in an isolated environment.

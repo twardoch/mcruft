@@ -8,6 +8,7 @@ requires-python = ">=3.12"
 dependencies = ["mcruft"]
 
 [project.optional-dependencies]
+all = ["mcruft-designcraft[bundled]"]
 bundled = ["mcruft-designcraft-bin"]
 
 [project.entry-points."mcruft.engines"]
