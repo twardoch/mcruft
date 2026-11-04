@@ -1,0 +1,53 @@
+{
+  "version": "0.1.2",
+  "files": [
+    {
+      "filename": "mcruft-0.1.2-py3-none-any.whl",
+      "sha256": "b4574f2c05b2a1c7e67c56e8efc8fc146fe51e1094e20d8e7081ab24de49d650"
+    },
+    {
+      "filename": "mcruft-0.1.2.tar.gz",
+      "sha256": "b22ccdc7cc899feb89408268f905f3531fab863fcbd4bfbc2839343ed8a9804c"
+    },
+    {
+      "filename": "mcruft_deckcraft-0.1.2-py3-none-any.whl",
+      "sha256": "be5d7c20e4b54b56fd11918d0e4c5358913978a6fe1829f94b917148e6c41a4d"
+    },
+    {
+      "filename": "mcruft_deckcraft-0.1.2.tar.gz",
+      "sha256": "5e332991d41ad9663355ddc08438dff17414fd327391027e3b5258c7467cc405"
+    },
+    {
+      "filename": "mcruft_designcraft-0.1.2-py3-none-any.whl",
+      "sha256": "0f310f552f9a17d6fae8eeaabaa7f5410d198d12f9ffebe4febf4c5dddd4487b"
+    },
+    {
+      "filename": "mcruft_designcraft-0.1.2.tar.gz",
+      "sha256": "ceb36aea613b68f0a496550463bffe7fc925bf3ddbb26be517deca49fdd5edca"
+    },
+    {
+      "filename": "mcruft_pdfcraft-0.1.2-py3-none-any.whl",
+      "sha256": "2e70f9dda3aab5c8460dd20644ebe7a131130a5a737a0a022ea88a76bf182f04"
+    },
+    {
+      "filename": "mcruft_pdfcraft-0.1.2.tar.gz",
+      "sha256": "386b712634804832e08899c0477780e120400746f9880f57eb7f900c9fb41918"
+    },
+    {
+      "filename": "mcruft_photocraft-0.1.2-py3-none-any.whl",
+      "sha256": "8ec9ea6acc8e050a8e7ab46c6e80f5973b4c5a3fb27f7e8f31dc8554b72f9657"
+    },
+    {
+      "filename": "mcruft_photocraft-0.1.2.tar.gz",
+      "sha256": "f3b9d3d381ad9a860839382c83eea916be8507c33651db73e2fabb80df6450cd"
+    },
+    {
+      "filename": "mcruft_vectorcraft-0.1.2-py3-none-any.whl",
+      "sha256": "d039891963fec4d4a8367afa81d9fdda384b5685613263bcaaee3c12c613a1ab"
+    },
+    {
+      "filename": "mcruft_vectorcraft-0.1.2.tar.gz",
+      "sha256": "2ba1253db541964d4d17a3eb260e1f9d72aed88bb3c8f7c0903d0328a746917b"
+    }
+  ]
+}

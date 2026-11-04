@@ -1,6 +1,7 @@
 # this_file: packages/mcruft/tests/test_release_tooling.py
 import builtins
 import importlib
+import os
 import subprocess
 from importlib.metadata import version
 from pathlib import Path
@@ -9,7 +10,28 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[3]
 GUARD = ROOT / "lib/guard.sh"
-MODULES = [path.parent.name for path in (ROOT / "packages").glob("*/pyproject.toml")]
+MODULES = ["mcruft"] + [path.parent.name for path in (ROOT / "packages").glob("*/pyproject.toml")]
+
+
+def test_installer_uses_system_editables_and_bypasses_exclusions(tmp_path):
+    uv = tmp_path / "uv"
+    uv.write_text('#!/bin/sh\nprintf "%s\\n" "$PWD" "$@"\n')
+    uv.chmod(0o755)
+    result = subprocess.run(
+        ["bash", str(ROOT / "install.sh"), "--dry-run"],
+        cwd=tmp_path,
+        env={**os.environ, "PATH": f"{tmp_path}:{os.environ['PATH']}"},
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    lines = result.stdout.splitlines()
+    assert lines[0] == str(ROOT)
+    assert lines[1:7] == ["pip", "install", "--system", "--upgrade", "-e", ".[all]"]
+    assert "--no-config" in lines
+    assert lines.count("-e") == 6
+    assert ["--group", "dev"] == lines[lines.index("--group") : lines.index("--group") + 2]
+    assert lines[-1] == "--dry-run"
 
 
 @pytest.mark.parametrize("module", MODULES)

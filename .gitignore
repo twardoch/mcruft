@@ -228,3 +228,6 @@ packages/*/src/*/__version__.py
 !/lib/
 /lib/*
 !/lib/guard.sh
+
+# macOS
+.DS_Store

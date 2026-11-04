@@ -273,6 +273,7 @@ EffectCraft and SoundCraft:
 ## 9. Repository and distributions
 
 ```text
+pyproject.toml                  core package metadata (installable workspace root)
 packages/mcruft/                 core (model, package I/O, router, Report, lib engine, CLI + MCP runners)
 packages/mcruft_<product>/       ×5: engine declaration + command adapters (pure Python, entry point)
 native/mcruft_pdfcraft_native/   maturin/PyO3 proof binding; NOT a uv workspace member
@@ -293,10 +294,19 @@ tools/bundle_cli.py              builds the mcruft-<product>-bin wheels
   the installed CLI. Link only model, format, render and pdf-level crates. Copy only the `hayro`
   and `lopdf` `[patch.crates-io]` entries. The proof binding covers PdfCraft page count, extract
   and combine. It is built on demand (`maturin build`), not by `uv sync`.
+- **Installation.** The workspace root installs the core. Every distribution exposes
+  `all`; `mcruft[all]` includes all engine extras, CLI bundles, optional libraries,
+  MCP and the PdfCraft native extension. The installer uses `--no-config` to bypass
+  source-workspace exclusions for unpublished binary/native wheels.
+
 - **Release tooling.** Six pure-Python workspace packages share canonical `vMAJOR.MINOR.PATCH`
   tags and generated hatch-vcs version files. Clean-tree gates precede a changelog stamp and
   gitnextver commit/tag/push, then GitHub assets and optional PyPI uploads. Bundled CLI wheels
   and the native crate are excluded; tooling runs only when explicitly invoked.
+- **Publication recovery.** `tools/resume_publish.py` previews a stable release's six
+  pure-Python wheels and sdists, checks existing PyPI hashes, and requires `--publish`
+  to upload missing artifacts. It never builds or versions packages, refuses hash
+  conflicts, disables automatic HTTP retries and verifies publication afterward.
 
 ## 10. Out of scope for the MVP
 

@@ -5,8 +5,13 @@ build-backend = "maturin"
 
 [project]
 name = "mcruft-pdfcraft-native"
-version = "0.0.0"
+version = "0.1.0"
 requires-python = ">=3.12"
+license = "Apache-2.0 AND (MIT OR Apache-2.0)"
+license-files = ["licenses/**/*"]
+
+[project.optional-dependencies]
+all = []
 
 [tool.maturin]
 module-name = "mcruft_pdfcraft_native"

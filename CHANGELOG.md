@@ -6,6 +6,27 @@ this_file: CHANGELOG.md
 
 ## Unreleased
 
+- `mcruft-pdfcraft-native` 0.1.0: real version and PEP 639 licence metadata; the wheel ships
+  mcruft, PdfCraft and every linked crate's licence files (`native/.../licenses/`).
+- CLI bundle wheels are built from the official release zips with their licence/attribution
+  files (`--license-dir`); arm64 binaries verified against the `macosx_11_0` tag.
+- Tests detect embedded fonts by parsing the PDF, not by grepping bytes: the native writer
+  uses object streams, which hid `/FontFile2` from the byte search.
+- Finish the `0.1.2` PyPI publication: PhotoCraft and VectorCraft wheels and sdists
+  uploaded from the preserved artifacts; all twelve files verified by SHA-256, and a
+  registry-only `mcruft[engines]==0.1.2` install registers all seven engine entry points
+  (`pdfcraft-native` stays unavailable until its binding is published).
+- Add a preview-first PyPI recovery tool with hash checks, duplicate skipping,
+  explicit upload mode, bounded HTTP behavior and post-upload verification;
+  preserve the `0.1.2` retry artifacts and document the next-session handoff.
+
+- Add recursive `all` extras across core, engines, native binding and CLI bundles;
+  include the PdfCraft native binding and bypass workspace wheel exclusions in
+  the full installer.
+
+- Make the repository root editable-installable as `mcruft`; install local engines,
+  MCP/library extras and development tools system-wide through `install.sh`.
+
 ## v0.1.2 (2026-10-25)
 
 - Rebuild editable workspace installs when the git commit or tags change (uv `cache-keys`), so local release gates see current hatch-vcs versions.

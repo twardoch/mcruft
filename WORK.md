@@ -4,6 +4,100 @@ this_file: WORK.md
 
 # Work status
 
+## 0.1.2 PyPI publication finished (2026-11-04)
+
+- Preview against `.cache/publish-resume-0.1.2`: 8 published, 4 pending; all 12 local
+  SHA-256 hashes match `docs/handoffs/pypi-0.1.2-artifacts.json`.
+- One `--publish` run uploaded the PhotoCraft and VectorCraft wheels and sdists with no
+  429. The tool's immediate post-upload check exited 1 ("PyPI does not yet confirm every
+  file"); a preview about 60 s later confirmed all 12 files by SHA-256 (PyPI JSON lag).
+  Snapshot: `docs/handoffs/pypi-0.1.2-status-20261104.json`.
+- Registry-only check in a fresh Python 3.12 venv outside the checkout
+  (`--no-config`, PyPI index only): six distributions at 0.1.2; `mcruft.engines`
+  entry points register deckcraft, designcraft, lib, pdfcraft, pdfcraft_native, photocraft
+  and vectorcraft. `mcruft.engines()` reports `pdfcraft-native` as available=False (binding not
+  published); the five CLI engines are available only because the CLIs are on this machine's PATH.
+- No code changed, so tests were not rerun. No commit, tag, push or version bump.
+- CLI bundles rebuilt with licences: each binary taken from the official
+  `craft-maccli/<app>-cli-<ver>-macos-universal.zip` (byte-identical to the PATH binary), with
+  the zip's other files (LICENSE-MIT/APACHE, NOTICE, OFL font licences, third-party `licenses/`,
+  ASSETS.md, README) passed as `--license-dir`. 6–24 licence files per wheel, 30–52 MB.
+  All five thinned to arm64; `vtool` shows minos 11.0, matching `macosx_11_0_arm64`. Installed
+  into a fresh venv: each `--version` runs, `uv pip check` passes. Copies replace the
+  unlicensed test wheels in `dist/`. Not published.
+- Native wheel `mcruft_pdfcraft_native-0.0.0-cp312-abi3-macosx_11_0_arm64.whl` is not
+  publishable: version 0.0.0 and no licence files.
+- Gates after the doc edits: ruff clean, 202 passed.
+- Next (TODO.md): native package version/licences, the native/binary distributions, then a
+  new stable release with the `all` extras.
+
+## Publishing tool and next-session handoff (2026-10-26)
+
+- Added `tools/resume_publish.py`, using only the standard library and existing
+  uv CLI. Preview is the default. It covers the six stable pure-Python package
+  wheels/sdists, checks existing PyPI SHA-256, rejects conflicts/incomplete sets,
+  skips completed files and requires explicit `--publish` plus environment-only
+  credentials for one upload invocation. HTTP retries are disabled; file hashes
+  are checked again before upload and PyPI is checked afterward.
+- Preserved all twelve original 0.1.2 artifacts under
+  `.cache/publish-resume-0.1.2` without replacing any different existing bytes.
+  `docs/handoffs/pypi-0.1.2-artifacts.json` records their hashes. This protects
+  the retry set from `build.sh`, which removes and recreates `dist/`.
+- Added detailed `docs/handoffs/handoff-2026-10-26-0136.md`, a live status snapshot,
+  `TODO.md`, PLAN/SPEC/README updates and temporary routing in `AGENTS.md`.
+  `CLAUDE.md` already includes `AGENTS.md`, so both agent entry points find it.
+- New tests first failed because the tool did not exist. All 15 focused tests
+  now pass: preview, hash matching/conflicts, stable-version checks, incomplete
+  artifacts, HTTP 404 vs 429, credentials, changed bytes and upload failures.
+- Final full suite: 202 passed in 31.26s; Ruff check/format passed. Live preview
+  confirmed eight published files and four pending, without uploading anything.
+- No further publish attempts, background jobs, scheduled tasks, version changes,
+  commits, tags or pushes. Tomorrow's first action is a fresh preview of the
+  preserved artifacts; do not assume that midnight resets a rate limit.
+
+## PyPI retry (2026-10-26)
+
+- Checked live PyPI JSON: four existing 0.1.2 wheels match local SHA-256;
+  PhotoCraft, VectorCraft, five binary packages and the native package return 404.
+- Retried existing 0.1.2 artifacts with `uv publish --check-url` and
+  `UV_HTTP_RETRIES=0`. Duplicate wheels were skipped. Creating `mcruft-photocraft`
+  still failed with HTTP 429: `Too many new projects created`.
+- Published the four source archives for existing projects: mcruft, DeckCraft,
+  DesignCraft and PdfCraft. Verified all eight wheel/sdist hashes against PyPI JSON.
+- Warehouse source defaults: project creation 20/user/hour and 40/IP/hour,
+  with separate attempt limits and configurable account/deployment overrides.
+  These defaults do not establish this account's live quota or reset time;
+  uv's error output did not expose a reset deadline.
+- PhotoCraft and VectorCraft remain unpublished; no further new-project attempts,
+  version bumps, rebuilds, binary uploads, commits, tags or pushes were performed.
+  The unpublished `all`-extra changes remain separate from published 0.1.2 artifacts.
+- Verification report: `/tmp/mcruft-pypi-retry-20261026.json`.
+  No code changed, so no code tests were rerun.
+
+## Root editable install and complete extras (2026-10-25)
+
+- Promoted core metadata to the workspace root; kept its sources in
+  `packages/mcruft/src`. Updated workspace discovery, version generation and
+  metadata tests. All six wheels and sdists build, including wheels from sdists.
+- Added recursive `all` extras to core and engines, a PdfCraft `native` extra,
+  and empty `all` extras on native/binary distributions that have no optional deps.
+- `install.sh` installs six local editables system-wide with `.[all]` and dev
+  tools, searches existing `dist/` wheels, and passes `--no-config` so uv workspace
+  exclusions cannot suppress the native extension or bundled CLI wheels.
+- Verified the original root install command with `--dry-run`. Installed
+  `mcruft[all]` from real local wheels into a clean Python 3.13 environment,
+  then ran the installer against that environment via `--python`. Verified six
+  editable distributions, all five bundled CLI versions, optional module imports,
+  native-engine discovery and `uv pip check` (55 packages compatible).
+- Tests: initial regression failed for missing root project metadata; final full
+  suite passed 187 tests. After adding automatic dist lookup, the affected
+  installer/metadata/bundle tests passed all 32 cases. Ruff and bash syntax pass.
+- Built native abi3 and five CLI wheels, retained local copies in ignored `dist/`
+  for installation. Bundles include NOTICE but were built without upstream licence
+  files; these local test artifacts were not published.
+- System Python was not modified. Registry-only installation still requires
+  publication of all distributions; binary bundles currently target macOS arm64.
+
 ## Release tooling (2026-10-25)
 
 - Used the existing clean `release-tooling` branch at `main`/`v0.1.0` (`f9ebd84`).

@@ -1,13 +1,66 @@
 # this_file: pyproject.toml
-[tool.uv]
-# shortcut: binary distributions are unpublished, remove exclusions when wheels are available.
-exclude-dependencies = [
-  "mcruft-vectorcraft-bin", "mcruft-deckcraft-bin", "mcruft-photocraft-bin",
-  "mcruft-pdfcraft-bin", "mcruft-designcraft-bin",
+[project]
+license = "Apache-2.0"
+name = "mcruft"
+description = "Unified document API for paged media"
+dynamic = ["version"]
+requires-python = ">=3.12"
+dependencies = ["pypdf", "python-pptx", "Pillow"]
+
+[project.optional-dependencies]
+all = [
+  "mcruft[mcp,libs]", "mcruft-vectorcraft[all]", "mcruft-deckcraft[all]",
+  "mcruft-photocraft[all]", "mcruft-pdfcraft[all]", "mcruft-designcraft[all]",
+]
+mcp = ["mcp"]
+pdf = ["pypdfium2"]
+svg = ["resvg-py"]
+psd = ["psd-tools"]
+libs = ["pypdfium2", "resvg-py", "psd-tools"]
+engines = [
+  "mcruft-vectorcraft", "mcruft-deckcraft", "mcruft-photocraft",
+  "mcruft-pdfcraft", "mcruft-designcraft",
 ]
 
+[tool.uv.sources]
+mcruft-vectorcraft = { workspace = true }
+mcruft-deckcraft = { workspace = true }
+mcruft-photocraft = { workspace = true }
+mcruft-pdfcraft = { workspace = true }
+mcruft-designcraft = { workspace = true }
+
+[project.entry-points."mcruft.engines"]
+lib = "mcruft.engines.lib:engine"
+
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.0.0"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "packages/mcruft/src/mcruft/__version__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["packages/mcruft/src/mcruft"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/packages/mcruft/src", "/pyproject.toml", "/README.md", "/LICENSE"]
+
+[tool.uv]
+# Source workspace only; install.sh bypasses these exclusions with --no-config.
+exclude-dependencies = [
+  "mcruft-vectorcraft-bin", "mcruft-deckcraft-bin", "mcruft-photocraft-bin",
+  "mcruft-pdfcraft-bin", "mcruft-designcraft-bin", "mcruft-pdfcraft-native",
+]
+
+# Rebuild editable installs when git state changes, so hatch-vcs metadata stays current.
+cache-keys = [{ file = "pyproject.toml" }, { git = { commit = true, tags = true } }]
+
 [tool.uv.workspace]
-members = ["packages/*"]
+members = ["packages/mcruft_*"]
 
 [dependency-groups]
 dev = ["pytest", "ruff"]

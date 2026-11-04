@@ -88,7 +88,7 @@ def bundle(
             f"{package}/bin/{product}-cli": copied.read_bytes(),
             f"{info}/METADATA": (
                 f"Metadata-Version: 2.3\nName: mcruft-{product}-bin\n"
-                f"Version: {version}\nRequires-Python: >=3.12\n\n"
+                f"Version: {version}\nRequires-Python: >=3.12\nProvides-Extra: all\n\n"
             ).encode(),
             f"{info}/WHEEL": (
                 "Wheel-Version: 1.0\nGenerator: mcruft.bundle_cli\n"

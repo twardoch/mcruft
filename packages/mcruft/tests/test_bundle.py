@@ -44,6 +44,7 @@ def test_bundle_when_fake_binary_then_valid_wheel_and_record(
                 assert digest == "sha256=" + actual
                 assert int(size) == len(data)
         assert "Root-Is-Purelib: false" in archive.read(f"{info}/WHEEL").decode()
+        assert "Provides-Extra: all" in archive.read(f"{info}/METADATA").decode()
         assert "Name: mcruft-pdfcraft-bin" in archive.read(f"{info}/METADATA").decode()
         notice = archive.read(f"{info}/NOTICE").decode()
         for expected in (

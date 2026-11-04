@@ -19,14 +19,9 @@ excludes = [
     "mcruft-deckcraft-bin",
     "mcruft-designcraft-bin",
     "mcruft-pdfcraft-bin",
+    "mcruft-pdfcraft-native",
     "mcruft-photocraft-bin",
     "mcruft-vectorcraft-bin",
-]
-
-[manifest.dependency-groups]
-dev = [
-    { name = "pytest" },
-    { name = "ruff" },
 ]
 
 [[package]]
@@ -469,7 +464,7 @@ wheels = [
 
 [[package]]
 name = "mcruft"
-source = { editable = "packages/mcruft" }
+source = { editable = "." }
 dependencies = [
     { name = "pillow" },
     { name = "pypdf" },
@@ -477,6 +472,17 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+all = [
+    { name = "mcp" },
+    { name = "mcruft-deckcraft" },
+    { name = "mcruft-designcraft" },
+    { name = "mcruft-pdfcraft" },
+    { name = "mcruft-photocraft" },
+    { name = "mcruft-vectorcraft" },
+    { name = "psd-tools" },
+    { name = "pypdfium2" },
+    { name = "resvg-py" },
+]
 engines = [
     { name = "mcruft-deckcraft" },
     { name = "mcruft-designcraft" },
@@ -502,25 +508,46 @@ svg = [
     { name = "resvg-py" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
+
 [package.metadata]
 requires-dist = [
+    { name = "mcp", marker = "extra == 'all'" },
     { name = "mcp", marker = "extra == 'mcp'" },
     { name = "mcruft-deckcraft", marker = "extra == 'engines'", editable = "packages/mcruft_deckcraft" },
+    { name = "mcruft-deckcraft", extras = ["all"], marker = "extra == 'all'", editable = "packages/mcruft_deckcraft" },
     { name = "mcruft-designcraft", marker = "extra == 'engines'", editable = "packages/mcruft_designcraft" },
+    { name = "mcruft-designcraft", extras = ["all"], marker = "extra == 'all'", editable = "packages/mcruft_designcraft" },
     { name = "mcruft-pdfcraft", marker = "extra == 'engines'", editable = "packages/mcruft_pdfcraft" },
+    { name = "mcruft-pdfcraft", extras = ["all"], marker = "extra == 'all'", editable = "packages/mcruft_pdfcraft" },
     { name = "mcruft-photocraft", marker = "extra == 'engines'", editable = "packages/mcruft_photocraft" },
+    { name = "mcruft-photocraft", extras = ["all"], marker = "extra == 'all'", editable = "packages/mcruft_photocraft" },
     { name = "mcruft-vectorcraft", marker = "extra == 'engines'", editable = "packages/mcruft_vectorcraft" },
+    { name = "mcruft-vectorcraft", extras = ["all"], marker = "extra == 'all'", editable = "packages/mcruft_vectorcraft" },
     { name = "pillow" },
+    { name = "psd-tools", marker = "extra == 'all'" },
     { name = "psd-tools", marker = "extra == 'libs'" },
     { name = "psd-tools", marker = "extra == 'psd'" },
     { name = "pypdf" },
+    { name = "pypdfium2", marker = "extra == 'all'" },
     { name = "pypdfium2", marker = "extra == 'libs'" },
     { name = "pypdfium2", marker = "extra == 'pdf'" },
     { name = "python-pptx" },
+    { name = "resvg-py", marker = "extra == 'all'" },
     { name = "resvg-py", marker = "extra == 'libs'" },
     { name = "resvg-py", marker = "extra == 'svg'" },
 ]
-provides-extras = ["engines", "libs", "mcp", "pdf", "psd", "svg"]
+provides-extras = ["all", "engines", "libs", "mcp", "pdf", "psd", "svg"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
 
 [[package]]
 name = "mcruft-deckcraft"
@@ -531,10 +558,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mcruft", editable = "packages/mcruft" },
+    { name = "mcruft", editable = "." },
+    { name = "mcruft-deckcraft-bin", marker = "extra == 'all'" },
     { name = "mcruft-deckcraft-bin", marker = "extra == 'bundled'" },
 ]
-provides-extras = ["bundled"]
+provides-extras = ["all", "bundled"]
 
 [[package]]
 name = "mcruft-designcraft"
@@ -545,10 +573,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mcruft", editable = "packages/mcruft" },
+    { name = "mcruft", editable = "." },
+    { name = "mcruft-designcraft-bin", marker = "extra == 'all'" },
     { name = "mcruft-designcraft-bin", marker = "extra == 'bundled'" },
 ]
-provides-extras = ["bundled"]
+provides-extras = ["all", "bundled"]
 
 [[package]]
 name = "mcruft-pdfcraft"
@@ -560,11 +589,14 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mcruft", editable = "packages/mcruft" },
+    { name = "mcruft", editable = "." },
+    { name = "mcruft-pdfcraft-bin", marker = "extra == 'all'" },
     { name = "mcruft-pdfcraft-bin", marker = "extra == 'bundled'" },
+    { name = "mcruft-pdfcraft-native", extras = ["all"], marker = "extra == 'all'" },
+    { name = "mcruft-pdfcraft-native", extras = ["all"], marker = "extra == 'native'" },
     { name = "pypdf" },
 ]
-provides-extras = ["bundled"]
+provides-extras = ["all", "bundled", "native"]
 
 [[package]]
 name = "mcruft-photocraft"
@@ -575,10 +607,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mcruft", editable = "packages/mcruft" },
+    { name = "mcruft", editable = "." },
+    { name = "mcruft-photocraft-bin", marker = "extra == 'all'" },
     { name = "mcruft-photocraft-bin", marker = "extra == 'bundled'" },
 ]
-provides-extras = ["bundled"]
+provides-extras = ["all", "bundled"]
 
 [[package]]
 name = "mcruft-vectorcraft"
@@ -590,11 +623,12 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "mcruft", editable = "packages/mcruft" },
+    { name = "mcruft", editable = "." },
+    { name = "mcruft-vectorcraft-bin", marker = "extra == 'all'" },
     { name = "mcruft-vectorcraft-bin", marker = "extra == 'bundled'" },
     { name = "pypdf" },
 ]
-provides-extras = ["bundled"]
+provides-extras = ["all", "bundled"]
 
 [[package]]
 name = "numpy"
