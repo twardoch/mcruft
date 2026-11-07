@@ -62,7 +62,8 @@ then `PATH`. `engine.session()` opens the product's MCP server for interactive w
 
 `pip install "mcruft[engines]"` installs core and the five engine packages (`0.1.2` on PyPI).
 The CLIs themselves must be on PATH or set via `$MCRUFT_<PRODUCT>_CLI`.
-The newer `all` extras and binary/native distributions are not published yet.
+All five CLI bundles and the native binding are on PyPI. The newer core/engine
+release containing the `all` extras is pending.
 From a source clone:
 
 ```bash

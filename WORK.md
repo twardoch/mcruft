@@ -4,6 +4,18 @@ this_file: WORK.md
 
 # Work status
 
+## PyPI recovery resumed (2026-11-07)
+
+- Verified the six preserved wheels against `upload.sha256` and current PyPI JSON.
+  DeckCraft and DesignCraft already matched; the four remaining projects were absent.
+- One bounded `uv publish` invocation (`UV_HTTP_RETRIES=0`, HTTP timeout 60 s) published
+  PdfCraft bin 0.13.0, PdfCraft native 0.1.0, PhotoCraft bin 0.15.1 and VectorCraft bin
+  0.16.0. No 429 occurred. All six binary/native wheel hashes now match PyPI JSON:
+  `docs/handoffs/pypi-binary-status-20261107.json`.
+- Rechecked all twelve preserved core/engine 0.1.2 files: every PyPI hash still matches.
+- Release gates: Ruff check and format clean; full suite 204 passed in 159.13 s.
+- Next: finish the stable core/engine release and registry-only `mcruft[all]` verification.
+
 ## 0.1.3 preparation and new-project upload (2026-11-04)
 
 - PR #4 (squash `ae34507` on main): root metadata + `all` extras, licensed CLI bundles,
@@ -17,7 +29,9 @@ this_file: WORK.md
 - **0.1.3 not tagged or published**, since `mcruft[all]` would not resolve yet. The exact
   wheels are preserved in `.cache/publish-new-0.1.3/` with `upload.sha256`.
 - Rate-limit observation, not a promise: both sessions got 429 right after the 4th new project
-  in a short window. If that holds, the four remaining fit in one later attempt.
+  in a short window. That did **not** mean the window clears in an hour: the approved retry
+  ~75 min later (first try a connect timeout, then 21:2xZ) got 429 on the very first new
+  project (`mcruft-pdfcraft-bin`, still 404). Wait at least a day before the next attempt.
 - `dist/`: the stale unlicensed native 0.0.0 wheel is replaced by the 0.1.0 one.
 - **Next upload** (`.cache/` exists only on this machine; `resume_publish.py` covers only the six
   pure-Python packages, so use plain uv). Load credentials as in

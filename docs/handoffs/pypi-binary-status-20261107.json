@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-11-07T21:05:53.468898+00:00",
+  "files": [
+    {
+      "project": "mcruft-deckcraft-bin",
+      "version": "0.10.0",
+      "filename": "mcruft_deckcraft_bin-0.10.0-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "df217fe0e1c4dee6167b4308df37f5b96daaaaa4457bde76e18f57730b8f6a30",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/f4/77/bbbba7d4799e9aab7f6d9acdbf9c2b29123758df459e3ff8d15382c91ca5/mcruft_deckcraft_bin-0.10.0-py3-none-macosx_11_0_arm64.whl"
+    },
+    {
+      "project": "mcruft-designcraft-bin",
+      "version": "0.12.0",
+      "filename": "mcruft_designcraft_bin-0.12.0-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "6e73cb37691d6ae003f4a96ce80dd4ebce3516c81d002accaa8c696350f3dc5d",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/46/cf/d661813842bd4e010d25fa8a294b3aee96c26d2b96f918dbd3f3247e8c45/mcruft_designcraft_bin-0.12.0-py3-none-macosx_11_0_arm64.whl"
+    },
+    {
+      "project": "mcruft-pdfcraft-bin",
+      "version": "0.13.0",
+      "filename": "mcruft_pdfcraft_bin-0.13.0-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "e60176108edf3a13db02adfb14909bcb7e44114f8232c0c0b293bc75506695bc",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/a9/d0/256428861895f79977ed064142212d31c766af8f44b73669335414436b20/mcruft_pdfcraft_bin-0.13.0-py3-none-macosx_11_0_arm64.whl"
+    },
+    {
+      "project": "mcruft-pdfcraft-native",
+      "version": "0.1.0",
+      "filename": "mcruft_pdfcraft_native-0.1.0-cp312-abi3-macosx_11_0_arm64.whl",
+      "sha256": "9987dee3c840e2ec136df5c08cd63d731aec45dd647eab8e09406c6843d339f9",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/e2/aa/a9b6019e9af568f58b10236085a39f217a1955a67513bd08cb3568de9b22/mcruft_pdfcraft_native-0.1.0-cp312-abi3-macosx_11_0_arm64.whl"
+    },
+    {
+      "project": "mcruft-photocraft-bin",
+      "version": "0.15.1",
+      "filename": "mcruft_photocraft_bin-0.15.1-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "3d36b95702efab7abd2d171abcff4029c605b46169ff302e1311d73aab168e79",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/83/79/44ea44b47000d71a9a7f67cd2b435b7103e91020b399ead9ebb9d87c361b/mcruft_photocraft_bin-0.15.1-py3-none-macosx_11_0_arm64.whl"
+    },
+    {
+      "project": "mcruft-vectorcraft-bin",
+      "version": "0.16.0",
+      "filename": "mcruft_vectorcraft_bin-0.16.0-py3-none-macosx_11_0_arm64.whl",
+      "sha256": "91413a8bdf5acc756b94db18940c998d3e6bf6ce6a72c2e9108315713ffbf7da",
+      "state": "published",
+      "url": "https://files.pythonhosted.org/packages/da/09/59fdacd7795e6844a77ab0378efbff7f01892356234bb2b7b9c353172a17/mcruft_vectorcraft_bin-0.16.0-py3-none-macosx_11_0_arm64.whl"
+    }
+  ]
+}
