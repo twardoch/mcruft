@@ -6,6 +6,8 @@ this_file: CHANGELOG.md
 
 ## Unreleased
 
+## v1.0.0 (2026-11-07)
+
 - Move authored documentation into src_docs/md, add complete user guides and references,
   and build ProperDocs + MaterialX into docs on main pushes with Pages deployment.
 - Add readable PyPI descriptions, Markdown READMEs and project links for all twelve
