@@ -6,6 +6,9 @@ this_file: CHANGELOG.md
 
 ## Unreleased
 
+- Document verified PyPI-only installation of `mcruft[all]==0.1.3`, including
+  five bundled CLIs, optional libraries and native PDF extraction/combination.
+
 ## v0.1.3 (2026-11-07)
 
 - Publish all five licensed CLI bundles and the PdfCraft native binding to PyPI;

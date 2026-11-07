@@ -15,7 +15,7 @@ this_file: TODO.md
 - [x] Prepare the native abi3 wheel (0.1.0, licensed) and five licensed CLI bundles; merged as PR #4 (`ae34507`).
 - [x] Upload the four remaining new projects from `.cache/publish-new-0.1.3/`: PdfCraft/PhotoCraft/VectorCraft bins and PdfCraft native. Published 2026-11-07; all six binary/native hashes verified against PyPI JSON.
 - [x] Platform scope decided: keep the hard failure off macOS arm64 (no silent drops); documented in README.
-- [ ] Publish a new stable core/engine release containing the `all` extras; current `0.1.2` does not contain them.
-- [ ] Verify a fresh registry-only `mcruft[all]` installation includes optional libraries, MCP, five working CLI bundles and the native engine.
+- [x] Publish a new stable core/engine release containing the `all` extras: 0.1.3 published 2026-11-07, all twelve release files hash-verified.
+- [x] Verify a fresh registry-only `mcruft[all]` installation includes optional libraries, MCP, five working CLI bundles and the native engine (Python 3.12, macOS arm64).
 - [x] Remove the temporary publishing-resume section from `AGENTS.md` (done 2026-11-04).
-- [ ] Update release docs after the next stable release.
+- [x] Update release docs after the next stable release.

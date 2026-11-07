@@ -94,7 +94,12 @@ Quality gate (slop clean, verification, code review), README/CHANGELOG, push to 
 #### Publication recovery (done 2026-11-04)
 
 All six projects have verified `0.1.2` wheels and sdists on PyPI (steps 1–3 done;
-see `docs/handoffs/pypi-0.1.2-status-20261104.json`). Step 4 remains; `TODO.md` is the checklist.
+see `docs/handoffs/pypi-0.1.2-status-20261104.json`). Step 4 completed 2026-11-07:
+all five CLI bundles and native binding are published; core/engines 0.1.3 exposes
+the `all` extras. All eighteen new-release files are hash-verified, and an isolated
+PyPI-only `mcruft[all]==0.1.3` install passed on macOS arm64. Evidence is in
+`docs/handoffs/pypi-0.1.3-status-20261107.json`, `pypi-binary-status-20261107.json`
+and `pypi-all-install-20261107.json` in that directory. `TODO.md` is complete.
 
 1. Preview `tools/resume_publish.py --dist .cache/publish-resume-0.1.2` and
    compare the preserved artifact hashes with `docs/handoffs/pypi-0.1.2-artifacts.json`.

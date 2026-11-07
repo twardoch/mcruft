@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-11-07T21:08:39.971877+00:00",
+  "registry": "https://pypi.org/simple/",
+  "python": "3.12",
+  "platform": "macOS arm64",
+  "core_and_engines": {
+    "mcruft": "0.1.3",
+    "mcruft-deckcraft": "0.1.3",
+    "mcruft-designcraft": "0.1.3",
+    "mcruft-pdfcraft": "0.1.3",
+    "mcruft-photocraft": "0.1.3",
+    "mcruft-vectorcraft": "0.1.3"
+  },
+  "optional_imports": {
+    "mcp": true,
+    "pypdfium2": true,
+    "resvg_py": true,
+    "psd_tools": true
+  },
+  "bundled_clis": {
+    "deckcraft": {
+      "distribution_version": "0.10.0",
+      "output": "deckcraft-cli 0.10.0",
+      "from_isolated_environment": true
+    },
+    "designcraft": {
+      "distribution_version": "0.12.0",
+      "output": "designcraft-cli 0.12.0",
+      "from_isolated_environment": true
+    },
+    "pdfcraft": {
+      "distribution_version": "0.13.0",
+      "output": "pdfcraft-cli 0.13.0\nDiscord: https://discord.gg/artcraft  (help and feedback)\nWeb:     https://getartcraft.com/apps/pdfcraft\nSource:  https://github.com/storytold/pdfcraft",
+      "from_isolated_environment": true
+    },
+    "photocraft": {
+      "distribution_version": "0.15.1",
+      "output": "photocraft-cli 0.15.1 (60c87b988, 2026-10-23)",
+      "from_isolated_environment": true
+    },
+    "vectorcraft": {
+      "distribution_version": "0.16.0",
+      "output": "vectorcraft-cli 0.16.0",
+      "from_isolated_environment": true
+    }
+  },
+  "engines": [
+    {
+      "name": "designcraft",
+      "available": true,
+      "kind": "cli"
+    },
+    {
+      "name": "pdfcraft",
+      "available": true,
+      "kind": "cli"
+    },
+    {
+      "name": "pdfcraft-native",
+      "available": true,
+      "kind": "native"
+    },
+    {
+      "name": "vectorcraft",
+      "available": true,
+      "kind": "cli"
+    },
+    {
+      "name": "lib",
+      "available": true,
+      "kind": "lib"
+    },
+    {
+      "name": "photocraft",
+      "available": true,
+      "kind": "cli"
+    },
+    {
+      "name": "deckcraft",
+      "available": true,
+      "kind": "cli"
+    }
+  ],
+  "native_version": "0.1.0",
+  "native_extract_and_combine": "passed under editable and fidelity policies"
+}

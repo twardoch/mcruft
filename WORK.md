@@ -14,7 +14,19 @@ this_file: WORK.md
   `docs/handoffs/pypi-binary-status-20261107.json`.
 - Rechecked all twelve preserved core/engine 0.1.2 files: every PyPI hash still matches.
 - Release gates: Ruff check and format clean; full suite 204 passed in 159.13 s.
-- Next: finish the stable core/engine release and registry-only `mcruft[all]` verification.
+- Existing release workflow [42414284025](https://github.com/twardoch/mcruft/actions/runs/42414284025)
+  passed, created/pushed `v0.1.3` with gitnextver and published six core/engine wheel/sdist
+  pairs. Downloaded the GitHub release assets into `.cache/publish-resume-0.1.3`;
+  all twelve hashes match PyPI (`docs/handoffs/pypi-0.1.3-status-20261107.json`).
+- A fresh Python 3.12 environment outside the checkout installed `mcruft[all]==0.1.3`
+  from PyPI only, without workspace config or local wheels. All 49 dependencies are
+  compatible. Core and five engines are 0.1.3; optional MCP/PDF/SVG/PSD imports work.
+- With PATH restricted to system directories and MCRUFT overrides removed, all five
+  CLI binaries from that isolated environment return their expected versions. All
+  seven engines are available. Published native binding extracts and combines PDFs
+  under both policies. Evidence: `docs/handoffs/pypi-all-install-20261107.json`.
+- Publication recovery is complete for all twelve prepared MVP distributions. Binary
+  and native wheels remain macOS arm64 only; other platforms were not runtime-tested.
 
 ## 0.1.3 preparation and new-project upload (2026-11-04)
 

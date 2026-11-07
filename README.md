@@ -60,10 +60,9 @@ then `PATH`. `engine.session()` opens the product's MCP server for interactive w
 
 ## Install
 
-`pip install "mcruft[engines]"` installs core and the five engine packages (`0.1.2` on PyPI).
+`pip install "mcruft[engines]"` installs core and the five engine packages (`0.1.3` on PyPI).
 The CLIs themselves must be on PATH or set via `$MCRUFT_<PRODUCT>_CLI`.
-All five CLI bundles and the native binding are on PyPI. The newer core/engine
-release containing the `all` extras is pending.
+Core, all five engines, all five CLI bundles and the native binding are on PyPI.
 From a source clone:
 
 ```bash
@@ -76,13 +75,13 @@ Every distribution provides an `all` extra. `mcruft[all]` includes all engines,
 MCP, PDF/SVG/PSD libraries, each engine's bundled CLI and the PdfCraft native binding.
 The bundled CLI and native wheels are macOS arm64 only (no sdist), so `mcruft[all]` fails to
 resolve on other platforms rather than silently dropping them; use `mcruft[engines]` there and
-put the CLIs on PATH. Once all distributions are published, install everything with:
+put the CLIs on PATH. Install everything with:
 
 ```bash
 uv pip install --system 'mcruft[all]'
 ```
 
-Until then, build the binary wheels with `tools/bundle_cli.py <product> --binary <cli> --license-dir <unzipped release>`
+To rebuild the binary wheels, use `tools/bundle_cli.py <product> --binary <cli> --license-dir <unzipped release>`
 (the official CLI zip minus the binary supplies the licence files) and the native wheel
 with `maturin build -i python3 --manifest-path native/mcruft_pdfcraft_native/Cargo.toml --out dist`.
 Run `./install.sh` to include those local wheels (it searches `dist/` when present). Without them,
