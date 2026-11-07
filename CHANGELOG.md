@@ -6,6 +6,8 @@ this_file: CHANGELOG.md
 
 ## Unreleased
 
+## v0.1.3 (2026-11-07)
+
 - Publish all five licensed CLI bundles and the PdfCraft native binding to PyPI;
   verify every wheel against its preserved SHA-256 hash.
 - `mcruft-pdfcraft-native` 0.1.0: real version and PEP 639 licence metadata; the wheel ships
