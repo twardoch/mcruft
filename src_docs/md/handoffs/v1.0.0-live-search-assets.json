@@ -1,0 +1,202 @@
+[
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-modular-ui.js",
+    "status": 200,
+    "bytes": 14634
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind.en_ec2b63162e.pf_meta",
+    "status": 200,
+    "bytes": 312
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-highlight.js",
+    "status": 200,
+    "bytes": 44404
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/wasm.unknown.pagefind",
+    "status": 200,
+    "bytes": 55386
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-worker.js",
+    "status": 200,
+    "bytes": 42928
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-ui.css",
+    "status": 200,
+    "bytes": 14482
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-ui.js",
+    "status": 200,
+    "bytes": 126634
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-component-ui.js",
+    "status": 200,
+    "bytes": 184026
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-modular-ui.css",
+    "status": 200,
+    "bytes": 7336
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/wasm.en.pagefind",
+    "status": 200,
+    "bytes": 59758
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-entry.json",
+    "status": 200,
+    "bytes": 180
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind.js",
+    "status": 200,
+    "bytes": 47228
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/pagefind-component-ui.css",
+    "status": 200,
+    "bytes": 42081
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_2e8e87c.pf_fragment",
+    "status": 200,
+    "bytes": 1004
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_47ca765.pf_fragment",
+    "status": 200,
+    "bytes": 7492
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_ad39f71.pf_fragment",
+    "status": 200,
+    "bytes": 1224
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_bbf540b.pf_fragment",
+    "status": 200,
+    "bytes": 1009
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_f8ecea4.pf_fragment",
+    "status": 200,
+    "bytes": 1853
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_f3c541b.pf_fragment",
+    "status": 200,
+    "bytes": 1079
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_ecd2bbd.pf_fragment",
+    "status": 200,
+    "bytes": 3121
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_3f402c2.pf_fragment",
+    "status": 200,
+    "bytes": 3606
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_9c9e3b7.pf_fragment",
+    "status": 200,
+    "bytes": 126
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_8eab49e.pf_fragment",
+    "status": 200,
+    "bytes": 846
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_31868e6.pf_fragment",
+    "status": 200,
+    "bytes": 3636
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_8a4e958.pf_fragment",
+    "status": 200,
+    "bytes": 944
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_6859293.pf_fragment",
+    "status": 200,
+    "bytes": 839
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_c509f65.pf_fragment",
+    "status": 200,
+    "bytes": 3672
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_3c6b8b5.pf_fragment",
+    "status": 200,
+    "bytes": 680
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_ed5712a.pf_fragment",
+    "status": 200,
+    "bytes": 447
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_3176c65.pf_fragment",
+    "status": 200,
+    "bytes": 1004
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_a31f580.pf_fragment",
+    "status": 200,
+    "bytes": 1139
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_7136ed8.pf_fragment",
+    "status": 200,
+    "bytes": 865
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_4a19e0d.pf_fragment",
+    "status": 200,
+    "bytes": 7287
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_7fa2b57.pf_fragment",
+    "status": 200,
+    "bytes": 3307
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_98be6a4.pf_fragment",
+    "status": 200,
+    "bytes": 1028
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_1dfd88a.pf_fragment",
+    "status": 200,
+    "bytes": 3515
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_121c298.pf_fragment",
+    "status": 200,
+    "bytes": 1832
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/fragment/en_16a2a96.pf_fragment",
+    "status": 200,
+    "bytes": 3157
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/index/en_551790c.pf_index",
+    "status": 200,
+    "bytes": 36434
+  },
+  {
+    "url": "https://code.twardoch.com/mcruft/search/index/en_4142a28.pf_index",
+    "status": 200,
+    "bytes": 37397
+  }
+]

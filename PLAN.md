@@ -119,3 +119,7 @@ into docs on every main push and deploy Pages. Give all twelve PyPI distribution
 readable Markdown descriptions and URLs. Release all twelve at 1.0.0, retaining upstream
 CLI version provenance and licences. Verify archive metadata, published hashes, isolated
 installation, native/CLI runtime behavior and live desktop/mobile navigation/search.
+
+Completed: all twelve distributions released as v1.0.0, all 18 artifact hashes
+verified, registry-only full installation and live site verification passed.
+See WORK.md and src_docs/md/handoffs/v1.0.0-completion-audit.json.

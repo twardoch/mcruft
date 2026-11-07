@@ -25,6 +25,6 @@ this_file: TODO.md
 - [x] Migrate and expand documentation, verify examples and strict build.
 - [x] Improve metadata/readmes for all twelve distributions.
 - [x] Configure push-triggered docs build into docs and Pages deployment.
-- [ ] Build, inspect and release all twelve distributions at 1.0.0.
-- [ ] Verify registry hashes and fresh mcruft[all] install.
-- [ ] Verify live desktop/mobile navigation and search.
+- [x] Build, inspect and release all twelve distributions at 1.0.0.
+- [x] Verify registry hashes and fresh mcruft[all] install.
+- [x] Verify live desktop/mobile navigation and search.

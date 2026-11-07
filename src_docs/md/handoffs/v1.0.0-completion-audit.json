@@ -1,0 +1,29 @@
+{
+  "release": "https://github.com/twardoch/mcruft/releases/tag/v1.0.0",
+  "release_workflow": "https://github.com/twardoch/mcruft/actions/runs/42419946862",
+  "documentation_workflow": "https://github.com/twardoch/mcruft/actions/runs/42419610845",
+  "requirements": {
+    "all_12_package_descriptions_and_readmes": "v1.0.0-pypi-all.json: each has summary, >1000-character Markdown description and documentation URL",
+    "all_18_release_artifacts": "v1.0.0-pypi-all.json: local artifacts and GitHub release digests match PyPI SHA-256",
+    "docs_migration": "all 18 original files retained in src_docs/md; path records updated; handoffs excluded from generated site",
+    "full_documentation": "tutorial, installation, task guides, API/package/route references, explanation, development, research archive",
+    "push_build": "docs.yml strict ProperDocs 1.6.7 + MaterialX 10.2.2 build, generated docs commit and Pages deploy passed",
+    "tag_and_push": "v1.0.0 pushed by gitnextver through release workflow",
+    "registry_install": "v1.0.0-registry-install.json: all twelve packages 1.0.0 and all seven engines available",
+    "live_site": "v1.0.0-live-links.json: 25 HTML pages and 698 links/anchors; v1.0.0-live-search-assets.json: 40 search assets",
+    "browser": "Chromium desktop 1440px and mobile 390px; light/dark, visible search, result navigation and mobile menu passed"
+  },
+  "checks": {
+    "full_suite": "218 passed in 47.13 s with 1.0.0 native wheel",
+    "ruff": "check and format pass",
+    "actionlint": "pass",
+    "strict_docs": "pass locally on Python 3.12 and 3.14 and hosted Ubuntu Python 3.12",
+    "twine": "all 18 archives pass",
+    "independent_review": "approved after branch-publication and native-error wording corrections"
+  },
+  "limits": [
+    "Binary/native runtime coverage is macOS arm64 only.",
+    "Firefox and Safari were not tested.",
+    "PyPI browser pages present a CAPTCHA; descriptions verified via registry JSON, readme_renderer and Twine."
+  ]
+}

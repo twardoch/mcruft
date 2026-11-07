@@ -1,0 +1,68 @@
+{
+  "versions": {
+    "mcruft": "1.0.0",
+    "mcruft-vectorcraft": "1.0.0",
+    "mcruft-vectorcraft-bin": "1.0.0",
+    "mcruft-deckcraft": "1.0.0",
+    "mcruft-deckcraft-bin": "1.0.0",
+    "mcruft-photocraft": "1.0.0",
+    "mcruft-photocraft-bin": "1.0.0",
+    "mcruft-pdfcraft": "1.0.0",
+    "mcruft-pdfcraft-bin": "1.0.0",
+    "mcruft-designcraft": "1.0.0",
+    "mcruft-designcraft-bin": "1.0.0",
+    "mcruft-pdfcraft-native": "1.0.0"
+  },
+  "engines": [
+    {
+      "name": "photocraft",
+      "available": true,
+      "version": "0.15.1"
+    },
+    {
+      "name": "deckcraft",
+      "available": true,
+      "version": "0.10.0"
+    },
+    {
+      "name": "designcraft",
+      "available": true,
+      "version": "0.12.0"
+    },
+    {
+      "name": "lib",
+      "available": true,
+      "version": "7.0.0"
+    },
+    {
+      "name": "vectorcraft",
+      "available": true,
+      "version": "0.16.0"
+    },
+    {
+      "name": "pdfcraft",
+      "available": true,
+      "version": "0.13.0"
+    },
+    {
+      "name": "pdfcraft-native",
+      "available": true,
+      "version": null
+    }
+  ],
+  "cli_versions": {
+    "vectorcraft": "vectorcraft-cli 0.16.0",
+    "deckcraft": "deckcraft-cli 0.10.0",
+    "photocraft": "photocraft-cli 0.15.1 (60c87b988, 2026-10-23)",
+    "pdfcraft": "pdfcraft-cli 0.13.0\nDiscord: https://discord.gg/artcraft  (help and feedback)\nWeb:     https://getartcraft.com/apps/pdfcraft\nSource:  https://github.com/storytold/pdfcraft",
+    "designcraft": "designcraft-cli 0.12.0"
+  },
+  "native_extract_combine_both_policies": true,
+  "core_tutorial": true,
+  "optional_imports": true,
+  "path": "system-only",
+  "installation": "fresh virtual environment; PyPI index only; no config, no cache, no local wheels",
+  "python": "3.12.12",
+  "platform": "macOS arm64",
+  "dependency_check": "49 compatible packages"
+}

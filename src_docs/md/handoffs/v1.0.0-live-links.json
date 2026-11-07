@@ -1,0 +1,188 @@
+{
+  "base": "https://code.twardoch.com/mcruft/",
+  "route_count": 25,
+  "routes": [
+    "https://code.twardoch.com/mcruft/",
+    "https://code.twardoch.com/mcruft/404.html",
+    "https://code.twardoch.com/mcruft/research/",
+    "https://code.twardoch.com/mcruft/research/vendors/",
+    "https://code.twardoch.com/mcruft/research/products/",
+    "https://code.twardoch.com/mcruft/research/products/photocraft/",
+    "https://code.twardoch.com/mcruft/research/products/vectorcraft/",
+    "https://code.twardoch.com/mcruft/research/products/designcraft/",
+    "https://code.twardoch.com/mcruft/research/products/pdfcraft/",
+    "https://code.twardoch.com/mcruft/research/products/deckcraft/",
+    "https://code.twardoch.com/mcruft/research/wheels-and-probe-2/",
+    "https://code.twardoch.com/mcruft/research/native-libs/",
+    "https://code.twardoch.com/mcruft/research/conversion-probe/",
+    "https://code.twardoch.com/mcruft/guide/install/",
+    "https://code.twardoch.com/mcruft/guide/mcp/",
+    "https://code.twardoch.com/mcruft/guide/troubleshooting/",
+    "https://code.twardoch.com/mcruft/guide/editing/",
+    "https://code.twardoch.com/mcruft/guide/export/",
+    "https://code.twardoch.com/mcruft/guide/first-document/",
+    "https://code.twardoch.com/mcruft/explanation/policies/",
+    "https://code.twardoch.com/mcruft/development/",
+    "https://code.twardoch.com/mcruft/workflow/",
+    "https://code.twardoch.com/mcruft/reference/specification/",
+    "https://code.twardoch.com/mcruft/reference/packages/",
+    "https://code.twardoch.com/mcruft/reference/api/"
+  ],
+  "internal_link_anchor_count": 698,
+  "local_asset_count": 4,
+  "http_request_count": 29,
+  "checks": {
+    "home_new_content": true,
+    "api_native_error_fix": true,
+    "tutorial_assertions": true,
+    "no_handoff_artifacts": true
+  },
+  "issues": [],
+  "http": {
+    "https://code.twardoch.com/mcruft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/404.html": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/404.html",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/vendors/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/vendors/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/photocraft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/photocraft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/vectorcraft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/vectorcraft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/designcraft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/designcraft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/pdfcraft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/pdfcraft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/products/deckcraft/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/products/deckcraft/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/wheels-and-probe-2/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/wheels-and-probe-2/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/native-libs/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/native-libs/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/research/conversion-probe/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/research/conversion-probe/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/install/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/install/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/mcp/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/mcp/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/troubleshooting/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/troubleshooting/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/editing/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/editing/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/export/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/export/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/guide/first-document/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/guide/first-document/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/explanation/policies/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/explanation/policies/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/development/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/development/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/workflow/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/workflow/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/reference/specification/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/reference/specification/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/reference/packages/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/reference/packages/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/reference/api/": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/reference/api/",
+      "type": "text/html; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/assets/stylesheets/main.1d60cbd7.min.css": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/assets/stylesheets/main.1d60cbd7.min.css",
+      "type": "text/css; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/assets/images/favicon.png": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/assets/images/favicon.png",
+      "type": "image/png"
+    },
+    "https://code.twardoch.com/mcruft/assets/javascripts/bundle.19ace10b.min.js": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/assets/javascripts/bundle.19ace10b.min.js",
+      "type": "application/javascript; charset=utf-8"
+    },
+    "https://code.twardoch.com/mcruft/assets/stylesheets/palette.a45159b5.min.css": {
+      "status": 200,
+      "url": "https://code.twardoch.com/mcruft/assets/stylesheets/palette.a45159b5.min.css",
+      "type": "text/css; charset=utf-8"
+    }
+  }
+}

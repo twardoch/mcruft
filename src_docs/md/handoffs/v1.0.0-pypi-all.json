@@ -1,0 +1,164 @@
+[
+  {
+    "package": "mcruft-deckcraft-bin",
+    "filename": "mcruft_deckcraft_bin-1.0.0-py3-none-macosx_11_0_arm64.whl",
+    "sha256": "15c125b91cf6ef05315c1661f9d098c8549567eab0532366b25331d113c24070",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 1459,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-designcraft-bin",
+    "filename": "mcruft_designcraft_bin-1.0.0-py3-none-macosx_11_0_arm64.whl",
+    "sha256": "6452d0ee456a4d693cf169c3e13db96344e3e35e5ac72a274549cb370ea64bec",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 1472,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-pdfcraft-bin",
+    "filename": "mcruft_pdfcraft_bin-1.0.0-py3-none-macosx_11_0_arm64.whl",
+    "sha256": "2d95dc011e723a03745384e176ce838a4dbb35dec9ab6b9423914931c88645b8",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 1469,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-pdfcraft-native",
+    "filename": "mcruft_pdfcraft_native-1.0.0-cp312-abi3-macosx_11_0_arm64.whl",
+    "sha256": "a4c772fbee0a040046010ac594e4554ff3a199569154912a7f6fd665a075d7e1",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2240,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-photocraft-bin",
+    "filename": "mcruft_photocraft_bin-1.0.0-py3-none-macosx_11_0_arm64.whl",
+    "sha256": "0d60b926e96ec14cf902cd679522f4d24454b6475042069561ab1e4327c44add",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 1459,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-vectorcraft-bin",
+    "filename": "mcruft_vectorcraft_bin-1.0.0-py3-none-macosx_11_0_arm64.whl",
+    "sha256": "7cec3ddbbe1c8170df36bab1e99b5921a86ac39eed7146aca6814116278d300b",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 1486,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft",
+    "filename": "mcruft-1.0.0-py3-none-any.whl",
+    "sha256": "4459109d7e3c88868b5f8437ed893c666ee6b9b6b4e10cd76c080d95e9f556c7",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 5019,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft",
+    "filename": "mcruft-1.0.0.tar.gz",
+    "sha256": "30f5490be2444db234b340c2f1431e24d891fe6b9d9311b867c7703259188eee",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 5019,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-deckcraft",
+    "filename": "mcruft_deckcraft-1.0.0-py3-none-any.whl",
+    "sha256": "fab24fb032883fcb6042447498ece3c2072cfdca3a3a19c7c7b3cda77261f699",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2210,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-deckcraft",
+    "filename": "mcruft_deckcraft-1.0.0.tar.gz",
+    "sha256": "d7f49ae540499c2fed6d45f55220ee7092656693085af9705ca7b03326559e04",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2210,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-designcraft",
+    "filename": "mcruft_designcraft-1.0.0-py3-none-any.whl",
+    "sha256": "ce13b780c7ded8cceafbb4417ca4a819a3ec56698c7e830579581ae3eae15e56",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2229,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-designcraft",
+    "filename": "mcruft_designcraft-1.0.0.tar.gz",
+    "sha256": "7bd31a51f8349c4750e01ca7a54be6572fa950042c2f526f1f71f2d8628d5bb2",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2229,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-pdfcraft",
+    "filename": "mcruft_pdfcraft-1.0.0-py3-none-any.whl",
+    "sha256": "876629671012389b680f8d61908b410fc315ddf4705a0330d6fe358f9868a464",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2296,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-pdfcraft",
+    "filename": "mcruft_pdfcraft-1.0.0.tar.gz",
+    "sha256": "17c0fe52d4a40b995f8f45022744270d9c27be448ace4ca882fd51a2487ad3ca",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2296,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-photocraft",
+    "filename": "mcruft_photocraft-1.0.0-py3-none-any.whl",
+    "sha256": "2bc2ba34f87c0a02dd162139445b9af0b0a88b75303f58baaaffb4bbe09a5ebf",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2211,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-photocraft",
+    "filename": "mcruft_photocraft-1.0.0.tar.gz",
+    "sha256": "e8387b1c9a0bb0c617353db303a6f4a38a38129d2dcf9616ad1a32e7656381c2",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2211,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-vectorcraft",
+    "filename": "mcruft_vectorcraft-1.0.0-py3-none-any.whl",
+    "sha256": "d7e94c09c7d99ca8912b8dfd760999207d8259243d50d0cbc86c6fb006f588bc",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2232,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  },
+  {
+    "package": "mcruft-vectorcraft",
+    "filename": "mcruft_vectorcraft-1.0.0.tar.gz",
+    "sha256": "f4dfacd9e8ec338c9bb1a4c5ed555278bab3c4ac3249f4cd6d1f183c80221276",
+    "version": "1.0.0",
+    "published_hash_matches": true,
+    "readme_characters": 2232,
+    "documentation_url": "https://code.twardoch.com/mcruft/"
+  }
+]

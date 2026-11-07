@@ -258,3 +258,32 @@ passed a whole-branch review followed by one fix wave.
 - Locked docs build also passes on Python 3.12 (CI version). Local browser search
   returns 17 documents for conversion; desktop/mobile render and mobile menu work,
   with no horizontal page overflow at 390 px.
+
+## Documentation and v1.0.0 complete (2026-11-07)
+
+- All twelve distributions published as 1.0.0. All 18 PyPI files match the
+  downloaded pure-Python GitHub assets or preserved binary/native artifacts; all
+  18 GitHub release asset digests also match. Metadata for every project has a
+  summary, readable Markdown README and documentation/source/issue links.
+- Binary upload recovered from one HTTP timeout using the exact preserved files
+  after reconciling registry state. No rate limit occurred and no artifacts were
+  rebuilt or versions changed during recovery.
+- Release workflow 42419946862 passed; gitnextver pushed v1.0.0 at 0264dc6.
+  GitHub release includes twelve wheels and six source archives.
+- Fresh Python 3.12 registry-only install, without config/cache/local wheels,
+  installs all twelve packages at 1.0.0. Seven engines available, five bundled
+  CLIs run with system-only PATH, optional imports work, tutorial and native PDF
+  extraction/combination pass under both policies. All 49 dependencies compatible.
+  Early attempts observed temporary PyPI simple-index propagation delay; final
+  fresh installation passed after all projects exposed 1.0.0.
+- Push-triggered docs workflow 42419610845 built, committed docs (191529f) and
+  deployed Pages. Live https://code.twardoch.com/mcruft/ now serves the full site.
+  Independent live verification: 25 HTML pages, 698 links/anchors, four linked
+  static assets and all 40 search assets pass; visible search/result navigation
+  and tutorial navigation pass. Desktop/mobile, light/dark, mobile menu and
+  390 px overflow checks pass in Chromium.
+- Evidence: src_docs/md/handoffs/v1.0.0-*.json. Historical handoffs remain source
+  artifacts and are excluded from the generated public site.
+- Limits: binary/native runtimes tested only on macOS arm64; Safari/Firefox not
+  tested. PyPI UI presents a CAPTCHA; registry metadata, README rendering and
+  Twine checks provide description verification. No remaining release tasks.
