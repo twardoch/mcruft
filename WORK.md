@@ -11,20 +11,20 @@ this_file: WORK.md
 - One bounded `uv publish` invocation (`UV_HTTP_RETRIES=0`, HTTP timeout 60 s) published
   PdfCraft bin 0.13.0, PdfCraft native 0.1.0, PhotoCraft bin 0.15.1 and VectorCraft bin
   0.16.0. No 429 occurred. All six binary/native wheel hashes now match PyPI JSON:
-  `docs/handoffs/pypi-binary-status-20261107.json`.
+  `src_docs/md/handoffs/pypi-binary-status-20261107.json`.
 - Rechecked all twelve preserved core/engine 0.1.2 files: every PyPI hash still matches.
 - Release gates: Ruff check and format clean; full suite 204 passed in 159.13 s.
 - Existing release workflow [42414284025](https://github.com/twardoch/mcruft/actions/runs/42414284025)
   passed, created/pushed `v0.1.3` with gitnextver and published six core/engine wheel/sdist
   pairs. Downloaded the GitHub release assets into `.cache/publish-resume-0.1.3`;
-  all twelve hashes match PyPI (`docs/handoffs/pypi-0.1.3-status-20261107.json`).
+  all twelve hashes match PyPI (`src_docs/md/handoffs/pypi-0.1.3-status-20261107.json`).
 - A fresh Python 3.12 environment outside the checkout installed `mcruft[all]==0.1.3`
   from PyPI only, without workspace config or local wheels. All 49 dependencies are
   compatible. Core and five engines are 0.1.3; optional MCP/PDF/SVG/PSD imports work.
 - With PATH restricted to system directories and MCRUFT overrides removed, all five
   CLI binaries from that isolated environment return their expected versions. All
   seven engines are available. Published native binding extracts and combines PDFs
-  under both policies. Evidence: `docs/handoffs/pypi-all-install-20261107.json`.
+  under both policies. Evidence: `src_docs/md/handoffs/pypi-all-install-20261107.json`.
 - Publication recovery is complete for all twelve prepared MVP distributions. Binary
   and native wheels remain macOS arm64 only; other platforms were not runtime-tested.
 
@@ -47,7 +47,7 @@ this_file: WORK.md
 - `dist/`: the stale unlicensed native 0.0.0 wheel is replaced by the 0.1.0 one.
 - **Next upload** (`.cache/` exists only on this machine; `resume_publish.py` covers only the six
   pure-Python packages, so use plain uv). Load credentials as in
-  `docs/handoffs/handoff-2026-10-26-0136.md` §6, never printing them, then:
+  `src_docs/md/handoffs/handoff-2026-10-26-0136.md` §6, never printing them, then:
 
   ```bash
   cd .cache/publish-new-0.1.3 && shasum -a 256 -c upload.sha256
@@ -62,11 +62,11 @@ this_file: WORK.md
 ## 0.1.2 PyPI publication finished (2026-11-04)
 
 - Preview against `.cache/publish-resume-0.1.2`: 8 published, 4 pending; all 12 local
-  SHA-256 hashes match `docs/handoffs/pypi-0.1.2-artifacts.json`.
+  SHA-256 hashes match `src_docs/md/handoffs/pypi-0.1.2-artifacts.json`.
 - One `--publish` run uploaded the PhotoCraft and VectorCraft wheels and sdists with no
   429. The tool's immediate post-upload check exited 1 ("PyPI does not yet confirm every
   file"); a preview about 60 s later confirmed all 12 files by SHA-256 (PyPI JSON lag).
-  Snapshot: `docs/handoffs/pypi-0.1.2-status-20261104.json`.
+  Snapshot: `src_docs/md/handoffs/pypi-0.1.2-status-20261104.json`.
 - Registry-only check in a fresh Python 3.12 venv outside the checkout
   (`--no-config`, PyPI index only): six distributions at 0.1.2; `mcruft.engines`
   entry points register deckcraft, designcraft, lib, pdfcraft, pdfcraft_native, photocraft
@@ -96,9 +96,9 @@ this_file: WORK.md
   are checked again before upload and PyPI is checked afterward.
 - Preserved all twelve original 0.1.2 artifacts under
   `.cache/publish-resume-0.1.2` without replacing any different existing bytes.
-  `docs/handoffs/pypi-0.1.2-artifacts.json` records their hashes. This protects
+  `src_docs/md/handoffs/pypi-0.1.2-artifacts.json` records their hashes. This protects
   the retry set from `build.sh`, which removes and recreates `dist/`.
-- Added detailed `docs/handoffs/handoff-2026-10-26-0136.md`, a live status snapshot,
+- Added detailed `src_docs/md/handoffs/handoff-2026-10-26-0136.md`, a live status snapshot,
   `TODO.md`, PLAN/SPEC/README updates and temporary routing in `AGENTS.md`.
   `CLAUDE.md` already includes `AGENTS.md`, so both agent entry points find it.
 - New tests first failed because the tool did not exist. All 15 focused tests
@@ -230,3 +230,31 @@ passed a whole-branch review followed by one fix wave.
   - `engines()` checks CLIs one after another.
   - The outline pass fails on an empty document.
 - Batch 2 products and the time-based media operations (SPEC §8).
+
+## Documentation and v1.0.0 in progress (2026-11-07)
+
+- Preserved staged docs migration to src_docs/md and updated path records/references.
+- Baseline full suite: 204 passed in 120.05 s.
+- Added core-only tutorial, installation, exports, editing, MCP, troubleshooting,
+  API/package reference, policy explanations and developer documentation.
+- Pinned ProperDocs 1.6.7 + MaterialX 10.2.2 with compiled dependencies; strict build passes.
+- All twelve package metadata/readmes improved; binary packaging supports release
+  version independent of embedded CLI version. Native package prepared as 1.0.0.
+- GitHub Pages currently points to main/docs and live route returns 404. New workflow
+  builds docs, commits generated output and deploys the same artifact through Pages.
+- Release/publication/live verification remain pending.
+
+- Final synchronized full suite with the actual 1.0.0 native wheel: **218 passed
+  in 47.13 s**. Ruff check/format, actionlint and diff whitespace checks pass.
+- All 18 candidate archives (12 wheels, six sdists) pass Twine checks. The five
+  CLI executables and licence files match the previously verified published bundles
+  byte-for-byte; native wheel contains 112 licence files.
+- Fresh candidate-wheel install on Python 3.12: all twelve distributions 1.0.0,
+  all seven engines available, five CLI versions verified with system-only PATH,
+  optional imports work; native extraction/combination pass under both policies.
+- Independent review approved docs/workflow after fixing non-main manual publication
+  and distinguishing CLI/native EngineFailed messages. Tutorial passed core-only,
+  698 links/anchors resolve, all 18 original docs retained.
+- Locked docs build also passes on Python 3.12 (CI version). Local browser search
+  returns 17 documents for conversion; desktop/mobile render and mobile menu work,
+  with no horizontal page overflow at 390 px.

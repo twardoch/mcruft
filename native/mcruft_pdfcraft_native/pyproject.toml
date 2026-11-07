@@ -5,10 +5,17 @@ build-backend = "maturin"
 
 [project]
 name = "mcruft-pdfcraft-native"
-version = "0.1.0"
+version = "1.0.0"
+description = "Pinned PdfCraft Rust bindings for PDF page counting, extraction and combination"
+readme = "README.md"
 requires-python = ">=3.12"
 license = "Apache-2.0 AND (MIT OR Apache-2.0)"
 license-files = ["licenses/**/*"]
+
+[project.urls]
+Documentation = "https://code.twardoch.com/mcruft/"
+Source = "https://github.com/twardoch/mcruft"
+Issues = "https://github.com/twardoch/mcruft/issues"
 
 [project.optional-dependencies]
 all = []

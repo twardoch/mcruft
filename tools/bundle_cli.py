@@ -6,6 +6,7 @@ import base64
 import csv
 import hashlib
 import io
+import re
 import shutil
 import stat
 import subprocess
@@ -27,9 +28,15 @@ def bundle(
     out: Path = Path("dist"),
     arch: str = "arm64",
     license_dir: Path | None = None,
+    version: str | None = None,
 ) -> Path:
     if product not in PRODUCTS or arch != "arm64":
         raise ValueError("Only batch-1 products and arm64 wheels are supported")
+    if (
+        version is not None
+        and re.fullmatch(r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)", version) is None
+    ):
+        raise ValueError("Release version must be a stable MAJOR.MINOR.PATCH")
     binary = binary or shutil.which(f"{product}-cli")
     if binary is None:
         raise FileNotFoundError(f"Cannot find {product}-cli")
@@ -37,13 +44,11 @@ def bundle(
     from_version = subprocess.run(
         [str(binary), "--version"], check=True, capture_output=True, text=True, timeout=30
     )
-    # Keep this tool runnable without installing mcruft.
-    import re
-
     match = re.search(r"\b\d+\.\d+\.\d+(?:[a-zA-Z0-9.+-]*)?", from_version.stdout)
     if match is None:
         raise ValueError(f"No version number in {from_version.stdout!r}")
-    version = match[0]
+    upstream_version = match[0]
+    version = version or upstream_version
     package = f"mcruft_{product}_bin"
     info = f"{package}-{version}.dist-info"
     tag = f"py3-none-macosx_11_0_{arch}"
@@ -79,7 +84,7 @@ def bundle(
         )
         files = {
             f"{info}/NOTICE": (
-                f"Product: {product}\nVersion: {version}\n"
+                f"Product: {product}\nVersion: {upstream_version}\nBundle-Version: {version}\n"
                 f"Upstream: https://github.com/storytold/{product}\n"
                 "Licence: MIT OR Apache-2.0\n"
                 "This binary is redistributed unmodified apart from lipo thinning.\n"
@@ -87,8 +92,21 @@ def bundle(
             f"{package}/__init__.py": init.encode(),
             f"{package}/bin/{product}-cli": copied.read_bytes(),
             f"{info}/METADATA": (
-                f"Metadata-Version: 2.3\nName: mcruft-{product}-bin\n"
-                f"Version: {version}\nRequires-Python: >=3.12\nProvides-Extra: all\n\n"
+                f"Metadata-Version: 2.4\nName: mcruft-{product}-bin\n"
+                f"Version: {version}\n"
+                f"Summary: Bundled {product}-cli for mcruft on macOS arm64\n"
+                "Requires-Python: >=3.12\nProvides-Extra: all\n"
+                "License-Expression: MIT OR Apache-2.0\n"
+                "Project-URL: Documentation, https://code.twardoch.com/mcruft/\n"
+                "Project-URL: Source, https://github.com/twardoch/mcruft\n"
+                "Project-URL: Issues, https://github.com/twardoch/mcruft/issues\n"
+                "Description-Content-Type: text/markdown\n\n"
+                + (
+                    Path(__file__).resolve().parents[1]
+                    / "packages"
+                    / f"mcruft_{product}"
+                    / "BINARY_README.md"
+                ).read_text()
             ).encode(),
             f"{info}/WHEEL": (
                 "Wheel-Version: 1.0\nGenerator: mcruft.bundle_cli\n"
@@ -129,8 +147,11 @@ def main() -> None:
     parser.add_argument("--out", type=Path, default=Path("dist"))
     parser.add_argument("--arch", choices=["arm64"], default="arm64")
     parser.add_argument("--license-dir", type=Path)
+    parser.add_argument(
+        "--version", help="Bundle release version; defaults to the upstream CLI version"
+    )
     args = parser.parse_args()
-    print(bundle(args.product, args.binary, args.out, args.arch, args.license_dir))
+    print(bundle(args.product, args.binary, args.out, args.arch, args.license_dir, args.version))
 
 
 if __name__ == "__main__":

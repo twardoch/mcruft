@@ -1,0 +1,1820 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="One Python API for assembling and converting paged documents, with explicit conversion policies and loss reports.">
+      
+      
+      
+        <link rel="canonical" href="https://code.twardoch.com/mcruft/research/native-libs/">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+        
+        
+        
+          <link rel="icon" href="../../assets/images/favicon.png">
+        
+      
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-materialx-10.2.2">
+    
+    
+      
+        <title>Native-format libraries for mcruft - mcruft</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d60cbd7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a45159b5.min.css">
+      
+    
+    
+
+    
+
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal" data-mx-topbar="glass">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="toc" type="checkbox" id="__toc" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__toc"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#native-format-libraries-for-mcruft" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="mcruft" class="md-header__button md-logo" aria-label="mcruft" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mcruft
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Native-format libraries for mcruft
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0">
+        <div class="md-search-result md-search-result--pagefind" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/twardoch/mcruft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    twardoch/mcruft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="mcruft" class="md-nav__button md-logo" aria-label="mcruft" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mcruft
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/twardoch/mcruft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    twardoch/mcruft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get started
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/first-document/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convert and export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/editing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edit a page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP sessions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policies and packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and engines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/specification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#pdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PDF
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SVG
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pptx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PPTX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DOCX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xlsx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        XLSX
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fonts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fonts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#raster" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Raster
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MVP selection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MVP selection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explicit-default-rejections-deferrals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicit default rejections / deferrals
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#risks-and-gaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Risks and gaps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              
+              
+              <article class="md-content__inner md-typeset" data-pagefind-body>
+                
+                  
+  
+  
+
+
+<h1 id="native-format-libraries-for-mcruft">Native-format libraries for mcruft<a class="headerlink" href="#native-format-libraries-for-mcruft" title="Permanent link">&para;</a></h1>
+<p>Research snapshot: <strong>2026-10-25</strong>. Third-party libraries only; these are dependency recommendations, not implemented or tested conversions. DOCX/XLSX research does not expand the batch-1 product scope.</p>
+<p>Release cells link to live PyPI JSON (version and earliest upload date of that version's files) or crates.io JSON (latest non-yanked stable release). Stars are GitHub repository counts queried on this date; <code>~</code> preserves GitHub's rounded display. Repository links supply upstream licensing, capabilities and maintenance evidence. Binding and engine releases are different products and may have different versions.</p>
+<p>Wheel notation: <strong>B M/L/W</strong> = binary wheels listed for macOS arm64 / Linux x86-64 / Windows x86-64; this does not promise every Python ABI or minimum OS. <strong>U</strong> = universal pure-Python wheel usable on those platforms, not a binary wheel. <strong>N/A</strong> = Rust crate without a verified distributed Python wheel. Dependencies installed as separate wheels are not bundled inside the parent wheel. “Core included” confirms the compiled extension, not a complete dynamic-linkage audit.</p>
+<p>Native archive check: downloaded nine macOS wheels into memory, without installation. Confirmed <code>libpdfium.dylib</code> in pypdfium2; qpdf and libjpeg dylibs in pikepdf; Rust extensions in pdf-oxide, resvg-py and python-calamine; the RLE extension in psd-tools; bundled codecs, FreeType and HarfBuzz in Pillow; and extensions in uharfbuzz and lxml. Linux/Windows archive contents and full transitive linkage on <strong>all</strong> platforms remain <strong>unverified</strong>. Standard OS runtimes are excluded from “native dependency”.</p>
+<h2 id="pdf">PDF<a class="headerlink" href="#pdf" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/yfedoseev/pdf_oxide">pdf-oxide</a></td>
+<td>Rust / PyO3, maturin</td>
+<td>MIT OR Apache-2.0</td>
+<td><a href="https://pypi.org/pypi/pdf-oxide/json">0.3.78 (2026-09-08)</a></td>
+<td style="text-align: right;">1,091</td>
+<td>B M/L/W; core included; upstream says no system deps</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Extraction, creation, editing and rendering; newer alternative, not proven feature-equivalent to MuPDF. OCR is optional and must be excluded from an offline base.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bzsanti/oxidize-python">oxidize-pdf</a></td>
+<td>Rust / PyO3</td>
+<td>MIT binding; verify pinned core notices</td>
+<td><a href="https://pypi.org/pypi/oxidize-pdf/json">0.22.0 (2026-10-11)</a></td>
+<td style="text-align: right;">6 (binding)</td>
+<td>B M/L/W; core included per upstream; native closure unverified</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Separate project from PDF Oxide; upstream pins core 5.4.2. Generate, parse, split, merge; optional MCP excluded.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pypdfium2-team/pypdfium2">pypdfium2</a></td>
+<td>Python ctypes / C++ PDFium</td>
+<td>Apache-2.0 OR BSD-3-Clause wrapper; PDFium BSD-style + dependency notices</td>
+<td><a href="https://pypi.org/pypi/pypdfium2/json">5.14.0 (2026-10-04)</a></td>
+<td style="text-align: right;">841</td>
+<td>B M/L/W; PDFium bundled</td>
+<td>Yes; render</td>
+<td>Limited creation/edit/save</td>
+<td>Permissive renderer; latest arm64 macOS wheel requires macOS 13. Source installation can fetch build binaries; use wheels.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pikepdf/pikepdf">pikepdf</a></td>
+<td>C++ qpdf / nanobind</td>
+<td><strong>MPL-2.0</strong>, file-level copyleft; qpdf Apache-2.0</td>
+<td><a href="https://pypi.org/pypi/pikepdf/json">10.17.0 (2026-10-11)</a></td>
+<td style="text-align: right;">2,816</td>
+<td>B M/L/W; qpdf bundled</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Strong structural repair/page operations; no page renderer. Latest macOS arm64 wheel tag requires <strong>macOS 15</strong>, despite older installation prose.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/py-pdf/pypdf">pypdf</a></td>
+<td>Pure Python</td>
+<td>BSD-3-Clause</td>
+<td><a href="https://pypi.org/pypi/pypdf/json">6.21.2 (2026-10-21)</a></td>
+<td style="text-align: right;">10,271</td>
+<td>U; no core natives; AES extra separate</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Merge/split, objects, metadata, extraction; no rendering/layout engine.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pymupdf/PyMuPDF">PyMuPDF</a></td>
+<td>Python / C MuPDF</td>
+<td><strong>AGPL-3.0 or commercial</strong></td>
+<td><a href="https://pypi.org/pypi/PyMuPDF/json">2.0 (2026-10-19)</a></td>
+<td style="text-align: right;">10,988</td>
+<td>B M/L/W; MuPDF included by upstream distribution; full closure unverified</td>
+<td>Yes; render</td>
+<td>Yes</td>
+<td>Exclude from permissive default; pypdfium2 renders and PDF Oxide/pypdf manipulate without AGPL.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/J-F-Liu/lopdf">lopdf</a></td>
+<td>Rust; maintained Python binding unverified</td>
+<td>MIT</td>
+<td><a href="https://crates.io/api/v1/crates/lopdf">0.46.0 (2026-10-21)</a></td>
+<td style="text-align: right;">2,286</td>
+<td>N/A; Python wheels unverified</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Low-level PDF objects/manipulation, not a renderer; custom binding work.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/pdf-rs/pdf">pdf-rs (<code>pdf</code>)</a></td>
+<td>Rust; Python binding unverified</td>
+<td>MIT</td>
+<td><a href="https://crates.io/api/v1/crates/pdf">0.10.0 (2026-03-02)</a></td>
+<td style="text-align: right;">1,718</td>
+<td>N/A; Python wheels unverified</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Upstream explicitly supports read/alter/write; not a ready Python document engine.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/borb-pdf/borb">borb</a></td>
+<td>Python</td>
+<td><strong>AGPL-3.0-or-later</strong></td>
+<td><a href="https://pypi.org/pypi/borb/json">3.0.9 (2026-08-03)</a></td>
+<td style="text-align: right;">3,572</td>
+<td>U; dependencies separate</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Exclude from permissive default; ReportLab supplies permissive PDF generation.</td>
+</tr>
+<tr>
+<td><a href="https://www.reportlab.com/">ReportLab</a></td>
+<td>Python; optional accelerators</td>
+<td>BSD</td>
+<td><a href="https://pypi.org/pypi/reportlab/json">5.1.0 (2026-10-22)</a></td>
+<td style="text-align: right;">N/A; canonical GitHub count unverified</td>
+<td>U; Pillow separate; optional acceleration/render backends separate</td>
+<td>No general PDF reader</td>
+<td>Yes</td>
+<td>Established page authoring and font embedding; PDF generation does not require Cairo.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/py-pdf/fpdf2">fpdf2</a></td>
+<td>Python</td>
+<td><strong>LGPL-3.0-only</strong></td>
+<td><a href="https://pypi.org/pypi/fpdf2/json">2.8.9 (2026-09-29)</a></td>
+<td style="text-align: right;">1,552</td>
+<td>U; Pillow/fontTools separate</td>
+<td>No general PDF reader</td>
+<td>Yes</td>
+<td>Useful authoring/font embedding, but less permissive than ReportLab.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jsvine/pdfplumber">pdfplumber</a></td>
+<td>Python / pdfminer.six</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/pdfplumber/json">0.11.10 (2026-06-15)</a></td>
+<td style="text-align: right;">10,851</td>
+<td>U; renderer/other native deps separate</td>
+<td>Yes</td>
+<td>No PDF authoring</td>
+<td>Detailed characters, geometry, tables; extraction adjunct, not an editor.</td>
+</tr>
+</tbody>
+</table>
+<p>Sources for bundling and limits: <a href="https://pikepdf.readthedocs.io/en/stable/installation.html">pikepdf installation</a>, <a href="https://pypi.org/project/pypdfium2/">pypdfium2 distribution/licensing</a>, <a href="https://pdf.oxide.fyi/rust/docs/reference/python-api">PDF Oxide Python API</a>, <a href="https://raw.githubusercontent.com/pdf-rs/pdf/master/README.md">pdf-rs read/alter/write</a>. Newer Rust packages have recent activity but need corpus acceptance testing; upstream benchmark claims are not independent evidence.</p>
+<h2 id="svg">SVG<a class="headerlink" href="#svg" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/baseplate-admin/resvg-py">resvg-py</a> (<code>resvg_py</code>)</td>
+<td>Rust / PyO3</td>
+<td>MIT binding; resvg MIT OR Apache-2.0</td>
+<td><a href="https://pypi.org/pypi/resvg-py/json">0.5.0 (2026-08-24)</a></td>
+<td style="text-align: right;">28</td>
+<td>B M/L/W; Rust core included; no Cairo</td>
+<td>SVG</td>
+<td>PNG, not editable SVG</td>
+<td>Small, active wrapper; fonts must be supplied for reproducibility.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/briceyan/resvg-py">resvg</a> (different PyPI package)</td>
+<td>Rust / PyO3</td>
+<td>MIT binding; upstream dual license</td>
+<td><a href="https://pypi.org/pypi/resvg/json">0.2.0 (2026-04-14)</a></td>
+<td style="text-align: right;">14</td>
+<td>B M/L/W; core included per build; closure unverified</td>
+<td>SVG / exposed usvg tree</td>
+<td>PNG</td>
+<td>Alternative lower-level interface; not the <code>resvg-py</code> distribution above.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/linebender/resvg">usvg / resvg crates</a></td>
+<td>Rust; wrappers above</td>
+<td>MIT OR Apache-2.0</td>
+<td><a href="https://crates.io/api/v1/crates/usvg">usvg 0.49.0</a>, <a href="https://crates.io/api/v1/crates/resvg">resvg 0.49.0</a> (2026-10-24)</td>
+<td style="text-align: right;">~4.2k shared</td>
+<td>N/A directly; Rust implementation needs no Cairo</td>
+<td>SVG normalization</td>
+<td>usvg: normalized SVG; resvg: pixels</td>
+<td>Static SVG, no browser scripting/animation; Python wrappers can embed older versions.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Kozea/CairoSVG">CairoSVG</a></td>
+<td>Python / cairocffi / C Cairo</td>
+<td><strong>LGPL-3.0-or-later</strong></td>
+<td><a href="https://pypi.org/pypi/cairosvg/json">2.9.1 (2026-09-07)</a></td>
+<td style="text-align: right;">956</td>
+<td>U; <strong>does not bundle Cairo</strong></td>
+<td>SVG</td>
+<td>PDF/PS/PNG/SVG</td>
+<td>System Cairo dependency disqualifies unchanged wheels from fully bundled default.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/meerk40t/svgelements">svgelements</a></td>
+<td>Pure Python</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/svgelements/json">1.9.6 (2023-08-17)</a></td>
+<td style="text-align: right;">171</td>
+<td>U; no mandatory native deps</td>
+<td>Geometry</td>
+<td>Basic SVG</td>
+<td>Editable geometry adjunct; incomplete CSS and styling. Last repo push 2024-10-17: maintenance risk.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/deeplook/svglib">svglib</a></td>
+<td>Python / ReportLab, lxml</td>
+<td><strong>LGPL-3.0-or-later</strong></td>
+<td><a href="https://pypi.org/pypi/svglib/json">2.3.2 (2026-10-23)</a></td>
+<td style="text-align: right;">371</td>
+<td>U; lxml/Pillow separate; bitmap backend can need Cairo</td>
+<td>SVG</td>
+<td>PDF via ReportLab; bitmap via backend</td>
+<td>Active; masks/foreignObject unsupported; PDF route itself needs no Cairo.</td>
+</tr>
+</tbody>
+</table>
+<p>Evidence: <a href="https://raw.githubusercontent.com/linebender/resvg/main/README.md">resvg no system libraries/static SVG</a>, <a href="https://raw.githubusercontent.com/baseplate-admin/resvg-py/master/Cargo.toml">wrapper build</a>, <a href="https://raw.githubusercontent.com/briceyan/resvg-py/main/Cargo.toml">alternative wrapper build</a>, <a href="https://cairosvg.org/documentation/">CairoSVG installation</a>, <a href="https://resvg-py.readthedocs.io/en/latest/fonts.html">font supply</a>. Font files are not supplied by resvg wheels.</p>
+<h2 id="psd">PSD<a class="headerlink" href="#psd" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/psd-tools/psd-tools">psd-tools</a></td>
+<td>Python + compiled RLE accelerator</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/psd-tools/json">1.26.0 (2026-10-21)</a></td>
+<td style="text-align: right;">1,483</td>
+<td>B M/L/W; accelerator included; NumPy/Pillow separate</td>
+<td>PSD/PSB, layers</td>
+<td>Limited PSD/PSB edits</td>
+<td>Active. Pixel/group editing and low-level saving; no text editing, font rendering or general smart-object editing.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/mdboom/pytoshop">pytoshop</a></td>
+<td>Python + Cython</td>
+<td>BSD</td>
+<td><a href="https://pypi.org/pypi/pytoshop/json">1.2.1 (2018-11-30)</a></td>
+<td style="text-align: right;">128</td>
+<td><strong>No wheels</strong> for latest release; source build</td>
+<td>PSD/PSB</td>
+<td>PSD/PSB</td>
+<td>Last repo push 2022-09-07; unsuitable default despite useful writer.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/chinedufn/psd">Rust <code>psd</code></a></td>
+<td>Rust; maintained Python binding unverified</td>
+<td>MIT OR Apache-2.0</td>
+<td><a href="https://crates.io/api/v1/crates/psd">0.3.5 (2024-01-04)</a></td>
+<td style="text-align: right;">283</td>
+<td>N/A; Python wheels unverified</td>
+<td>Pixel layers/groups</td>
+<td>No documented writer</td>
+<td>Last repo push 2025-01-30; narrower parser, not a Photoshop editing engine.</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://psd-tools.readthedocs.io/en/latest/">psd-tools capability list</a> distinguishes low-level read/write from unsupported high-level editing. Its <code>composite</code> extra adds aggdraw/scipy; wheel coverage for that entire extra is <strong>unverified</strong>. <a href="https://docs.rs/psd/latest/psd/">Rust API</a> supplies parsing/layer structures, not a verified writer.</p>
+<h2 id="pptx">PPTX<a class="headerlink" href="#pptx" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/scanny/python-pptx">python-pptx</a></td>
+<td>Python / lxml, Pillow</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/python-pptx/json">1.0.2 (2024-08-07)</a></td>
+<td style="text-align: right;">3,565</td>
+<td>U; native deps have separate wheels</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Established API; repo last pushed 2024-08-07. No slide renderer; incomplete Office feature editing.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/wakita181009/python-pptx-rs">python-pptx-rs</a></td>
+<td>Rust / PyO3, maturin</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/python-pptx-rs/json">0.0.1 (2026-07-05)</a></td>
+<td style="text-align: right;">0</td>
+<td>B M/L/W; core included per build; closure unverified</td>
+<td>Yes</td>
+<td>Yes, subset</td>
+<td>Upstream documents 75 compatibility scenarios and remaining unimplemented APIs. Early candidate, not established drop-in parity.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hidemi-ito/rust-pptx">Rust <code>pptx</code></a></td>
+<td>Rust; Python binding unverified</td>
+<td>MIT</td>
+<td><a href="https://crates.io/api/v1/crates/pptx">0.1.0 (2026-02-25)</a></td>
+<td style="text-align: right;">6</td>
+<td>N/A; Python wheels unverified</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><a href="https://docs.rs/crate/pptx/latest/source/README.md">API/readme</a> documents read/modify/save; adoption and fidelity need validation.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/yingkitw/ppt-rs">ppt-rs</a></td>
+<td>Rust; Python binding unverified</td>
+<td>Apache-2.0</td>
+<td><a href="https://crates.io/api/v1/crates/ppt-rs">0.2.37 (2026-10-24)</a></td>
+<td style="text-align: right;">50</td>
+<td>N/A; Python wheels unverified</td>
+<td>Yes, upstream claim</td>
+<td>Yes</td>
+<td>Active; optional native PDF export differs from LibreOffice route. Not verified as PowerPoint-equivalent.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docx">DOCX<a class="headerlink" href="#docx" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/python-openxml/python-docx">python-docx</a></td>
+<td>Python / lxml</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/python-docx/json">1.2.0 (2025-06-16)</a></td>
+<td style="text-align: right;">5,749</td>
+<td>U; lxml separate</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Repo active into 2026; no Word pagination or PDF rendering.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/bokuweb/docx-rs">docx-rs</a></td>
+<td>Rust; Rust/WASM documented, Python binding unverified</td>
+<td>MIT</td>
+<td><a href="https://crates.io/api/v1/crates/docx-rs">0.4.22 (2026-07-21)</a></td>
+<td style="text-align: right;">560</td>
+<td>N/A; Python wheels unverified</td>
+<td>Yes, subset</td>
+<td>Yes</td>
+<td>Current upstream supports parsing and generation, not just writing; custom PyO3 binding needed for adoption.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/mwilliamson/python-mammoth">mammoth</a></td>
+<td>Pure Python</td>
+<td>BSD-2-Clause</td>
+<td><a href="https://pypi.org/pypi/mammoth/json">1.13.0 (2026-09-26)</a></td>
+<td style="text-align: right;">1,120</td>
+<td>U; no native core</td>
+<td>DOCX</td>
+<td>HTML, not DOCX authoring</td>
+<td>Semantic extraction; deliberately loses page/layout fidelity. Markdown output is deprecated.</td>
+</tr>
+</tbody>
+</table>
+<p>python-docx/python-pptx are Python implementations, but <strong>not dependency-free pure-Python installations</strong>. <a href="https://lxml.de/installation.html">lxml installation</a> describes static binary distributions with libxml2/libxslt; source builds require native development libraries. Resolve and bundle dependency wheels explicitly.</p>
+<h2 id="xlsx">XLSX<a class="headerlink" href="#xlsx" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/tafia/calamine">calamine</a></td>
+<td>Rust; bindings below</td>
+<td>MIT</td>
+<td><a href="https://crates.io/api/v1/crates/calamine">0.37.0 (2026-10-18)</a></td>
+<td style="text-align: right;">~2.5k</td>
+<td>N/A directly</td>
+<td>XLSX/XLS/XLSB/ODS</td>
+<td>No</td>
+<td>Reader, not workbook editor or formula evaluator.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/dimastbk/python-calamine">python-calamine</a></td>
+<td>Rust / PyO3, maturin</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/python-calamine/json">0.9.0 (2026-10-16)</a></td>
+<td style="text-align: right;">507</td>
+<td>B M/L/W; Rust core included</td>
+<td>Yes</td>
+<td>No</td>
+<td>Active, simple value-oriented reader; not full style/layout preservation.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ToucanToco/fastexcel">fastexcel</a></td>
+<td>Rust Calamine + Arrow / PyO3</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/fastexcel/json">0.21.0 (2026-08-19)</a></td>
+<td style="text-align: right;">255</td>
+<td>B M/L/W; core included per build; closure unverified</td>
+<td>Yes</td>
+<td>No</td>
+<td>Arrow-oriented; PyArrow <strong>optional</strong> through PyCapsule interface, not mandatory in base.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jmcnamara/rust_xlsxwriter">rust_xlsxwriter</a></td>
+<td>Rust; third-party bindings below</td>
+<td>MIT OR Apache-2.0</td>
+<td><a href="https://crates.io/api/v1/crates/rust_xlsxwriter">0.101.0 (2026-10-20)</a></td>
+<td style="text-align: right;">595</td>
+<td>N/A directly</td>
+<td>No</td>
+<td>New XLSX</td>
+<td>Active upstream. Python XlsxWriter is a separate implementation, <strong>not its binding</strong>.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/rahmadafandi/rustpy-xlsxwriter">rustpy-xlsxwriter</a></td>
+<td>Rust / PyO3</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/rustpy-xlsxwriter/json">0.8.0 (2026-10-19)</a></td>
+<td style="text-align: right;">33</td>
+<td>B M/L/W; native closure unverified</td>
+<td>No</td>
+<td>New XLSX/CSV</td>
+<td>Real distributed Rust writer binding; young ecosystem, API differs from XlsxWriter.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Godse4ever/rvgsrust-xlsxwriter">rvgsrust-xlsxwriter</a></td>
+<td>Rust / PyO3, maturin</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/rvgsrust-xlsxwriter/json">0.3.5 (2026-09-16)</a></td>
+<td style="text-align: right;">3</td>
+<td>B M/L/W; native closure unverified</td>
+<td>No</td>
+<td>New XLSX</td>
+<td>Another real rust_xlsxwriter binding; current build enables zlib; do not infer dependency closure from Rust alone.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jmcnamara/XlsxWriter">XlsxWriter</a></td>
+<td>Pure Python</td>
+<td>BSD-2-Clause</td>
+<td><a href="https://pypi.org/pypi/xlsxwriter/json">3.3.0 (2026-10-22)</a></td>
+<td style="text-align: right;">3,986</td>
+<td>U; no native core</td>
+<td>No</td>
+<td>New XLSX</td>
+<td>Mature chart/formatting writer, cannot modify existing workbooks.</td>
+</tr>
+<tr>
+<td><a href="https://foss.heptapod.net/openpyxl/openpyxl">openpyxl</a></td>
+<td>Pure Python; optional lxml/Pillow</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/openpyxl/json">3.1.5 (2024-06-28)</a></td>
+<td style="text-align: right;">N/A; upstream on Heptapod</td>
+<td>U; no required native core</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Needed for workbook edits; older release, cannot preserve all Excel objects or calculate formulas.</td>
+</tr>
+</tbody>
+</table>
+<p>Evidence: <a href="https://rustxlsxwriter.github.io/">rust_xlsxwriter scope</a>, <a href="https://raw.githubusercontent.com/Godse4ever/rvgsrust-xlsxwriter/main/Cargo.toml">third-party writer's build</a>, <a href="https://openpyxl.readthedocs.io/en/stable/tutorial.html">openpyxl editing and preservation limits</a>. Rust writer bindings exist; the choice of Python XlsxWriter below reflects API maturity and packaging certainty, not absence of Rust bindings.</p>
+<h2 id="fonts">Fonts<a class="headerlink" href="#fonts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/fonttools/fonttools">fontTools</a></td>
+<td>Python; optional compiled accelerators</td>
+<td>MIT</td>
+<td><a href="https://pypi.org/pypi/fonttools/json">4.67.0 (2026-10-14)</a></td>
+<td style="text-align: right;">5,299</td>
+<td>U <strong>and</strong> B M/L/W; core needs no external libs</td>
+<td>TTF/OTF/etc.</td>
+<td>Fonts/subsets/outlines</td>
+<td>Active. Pens expose glyph paths; no complete PDF font-outlining operation.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/googlefonts/fontations">skrifa / Fontations</a></td>
+<td>Rust; production Python binding unverified</td>
+<td>MIT OR Apache-2.0</td>
+<td><a href="https://crates.io/api/v1/crates/skrifa">skrifa 0.49.0 (2026-10-21)</a></td>
+<td style="text-align: right;">848 shared</td>
+<td>N/A; Python wheels unverified</td>
+<td>Font metadata/outlines</td>
+<td>Not skrifa; separate write-fonts crate</td>
+<td>Active Rust foundation; not a ready Python substitute for fontTools.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/harfbuzz/uharfbuzz">uharfbuzz</a></td>
+<td>Cython / C++ HarfBuzz</td>
+<td>Apache-2.0 binding; HarfBuzz MIT-style</td>
+<td><a href="https://pypi.org/pypi/uharfbuzz/json">0.57.0 (2026-10-23)</a></td>
+<td style="text-align: right;">113</td>
+<td>B M/L/W; incorporates HarfBuzz sources</td>
+<td>Font input, shaping</td>
+<td>Glyph IDs/positions, not font/PDF authoring</td>
+<td>Complement for shaping before outline emission; no system HarfBuzz needed by default.</td>
+</tr>
+</tbody>
+</table>
+<p>Evidence: <a href="https://fonttools.readthedocs.io/en/latest/subset/index.html">fontTools subsetter</a>, <a href="https://fonttools.readthedocs.io/en/latest/pens/svgPathPen.html">SVGPathPen</a>, <a href="https://github.com/googlefonts/fontations/blob/main/skrifa/README.md">skrifa capability list</a>. FontTools can produce subsets and paths; embedding them correctly is the PDF writer's responsibility.</p>
+<h2 id="raster">Raster<a class="headerlink" href="#raster" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Lang/binding</th>
+<th>License</th>
+<th>Latest release (date)</th>
+<th style="text-align: right;">Stars</th>
+<th>Wheels bundle natives?</th>
+<th>Read</th>
+<th>Write</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/python-pillow/Pillow">Pillow</a></td>
+<td>Python / C codecs</td>
+<td>MIT-CMU; bundled-library notices apply</td>
+<td><a href="https://pypi.org/pypi/Pillow/json">13.0.0 (2026-10-16)</a></td>
+<td style="text-align: right;">13,926</td>
+<td>B M/L/W; codecs bundled, exact feature set varies</td>
+<td>Many rasters; limited PSD</td>
+<td>PNG/JPEG/TIFF/etc.</td>
+<td>General image backend, not layered PSD writer or PDF/SVG renderer.</td>
+</tr>
+<tr>
+<td>pypdfium2 render</td>
+<td>See PDF</td>
+<td>See PDF</td>
+<td>5.14.0 (2026-10-04)</td>
+<td style="text-align: right;">841</td>
+<td>B M/L/W; PDFium bundled</td>
+<td>PDF pages</td>
+<td>Bitmaps/Pillow images</td>
+<td>PDF visual-fidelity route; retains pixels, loses editable content.</td>
+</tr>
+<tr>
+<td>resvg-py render</td>
+<td>See SVG</td>
+<td>See SVG</td>
+<td>0.5.0 (2026-08-24)</td>
+<td style="text-align: right;">28</td>
+<td>B M/L/W; Rust core included</td>
+<td>Static SVG</td>
+<td>PNG bytes</td>
+<td>SVG visual-fidelity route, not SVG authoring.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://pillow.readthedocs.io/en/stable/installation/basic-installation.html">Pillow binary installation</a> documents included image libraries. PDFium calls must be serialized or placed in separate processes: its <a href="https://pypdfium2.readthedocs.io/en/stable/python_api.html">Python API documentation</a> prohibits simultaneous calls across threads, even for different documents.</p>
+<h2 id="mvp-selection">MVP selection<a class="headerlink" href="#mvp-selection" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Primary library</th>
+<th>Fallback</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PDF</td>
+<td>pdf-oxide + pypdfium2 rendering</td>
+<td>pypdf + ReportLab authoring</td>
+<td>Rust/PyO3 operations plus permissive bundled renderer; mature Python manipulation/creation alternatives.</td>
+</tr>
+<tr>
+<td>SVG</td>
+<td>resvg-py rendering + svgelements geometry</td>
+<td>resvg Python binding for rendering</td>
+<td>Rust renderer without Cairo; basic editable geometry remains separate and limited.</td>
+</tr>
+<tr>
+<td>PSD</td>
+<td>psd-tools</td>
+<td>Pillow composite-image read only</td>
+<td>Best verified Python layer access and limited saving; no equivalent layered-writer fallback.</td>
+</tr>
+<tr>
+<td>PPTX</td>
+<td>python-pptx</td>
+<td>python-pptx-rs, experimental subset</td>
+<td>Established editing API; Rust wheels exist but compatibility is incomplete.</td>
+</tr>
+<tr>
+<td>DOCX</td>
+<td>python-docx</td>
+<td>mammoth for semantic extraction only</td>
+<td>Established editing API; extraction fallback deliberately discards pagination/layout.</td>
+</tr>
+<tr>
+<td>XLSX</td>
+<td>python-calamine reading + XlsxWriter creation</td>
+<td>openpyxl for read/edit/save</td>
+<td>Prefer Rust reader; mature permissive writer; existing-workbook edits need a separate engine.</td>
+</tr>
+<tr>
+<td>Fonts</td>
+<td>fontTools + uharfbuzz</td>
+<td>fontTools alone for already positioned glyphs</td>
+<td>Bundled shaping plus font subsetting/outlines; existing PDF text requires its original glyph positions.</td>
+</tr>
+<tr>
+<td>Raster</td>
+<td>Pillow</td>
+<td>pypdfium2 / resvg-py for document rasterization only</td>
+<td>Bundled raster codecs; source-specific renderers supplement rather than replace image editing.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="explicit-default-rejections-deferrals">Explicit default rejections / deferrals<a class="headerlink" href="#explicit-default-rejections-deferrals" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>PyMuPDF and borb:</strong> AGPL risk; permissive alternatives exist above. A commercial MuPDF license is a separate decision.</li>
+<li><strong>CairoSVG:</strong> system Cairo plus LGPL; use resvg for rendering. <strong>svglib:</strong> LGPL and incomplete SVG; its PDF path avoids Cairo, but its bitmap path may introduce it. <strong>fpdf2:</strong> LGPL, prefer BSD ReportLab for default generation. LGPL is not AGPL, but is still non-permissive.</li>
+<li><strong>pikepdf:</strong> MPL is file-level copyleft, not AGPL; defer as optional repair backend when pypdf/PDF Oxide cannot meet requirements. Its current macOS 15 wheel minimum also narrows deployment.</li>
+<li><strong>pytoshop:</strong> 2018 release, 2022 last repository push, no latest-release wheels. <strong>Rust psd:</strong> old release, no documented writer or verified Python distribution.</li>
+<li><strong>lopdf, pdf-rs, docx-rs, direct skrifa/PPTX crates:</strong> useful Rust building blocks, but maintained Python binding/wheel availability is unverified; do not create custom bindings for the MVP solely to use Rust. Use usvg through the existing resvg wrappers when their exposed API suffices.</li>
+<li><strong>python-pptx-rs, rustpy-xlsxwriter, rvgsrust-xlsxwriter:</strong> real Rust/Python distributions, deferred from default editing/writing due to early API/adoption or unverified native closure. They merit focused follow-up, not an assertion that Rust bindings do not exist.</li>
+</ul>
+<h2 id="risks-and-gaps">Risks and gaps<a class="headerlink" href="#risks-and-gaps" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>PDF text outlining is not solved by choosing a font library.</strong> FontTools pens need glyph IDs, original advances/offsets, transforms, clipping and color; an existing PDF also needs font-resource/CMap interpretation and content-stream rewriting. Shaping Unicode again can change the original glyph sequence. Missing/subset fonts, Type 3 glyph programs and color fonts need explicit handling. No tested general outlining route is established here.</li>
+<li><strong>Font embedding:</strong> subset/instance fonts as needed, preserve encodings/ToUnicode and resource references, and respect the font's embedding/subsetting permissions. Bundled engines do not imply bundled font files. Supply licensed font assets rather than relying on host substitution.</li>
+<li><strong>Editable conversion:</strong> preserve native files and supported objects; report unsupported charts, effects, media, text and layout. <strong>Visual-fidelity conversion:</strong> render a page/slide to pixels when necessary and retain the native source; explicitly report lost editability/searchability. Rasterization cannot be described as a lossless editable round trip.</li>
+<li><strong>PSD:</strong> no verified ready-to-use Rust/Python layered writer matching psd-tools; psd-tools itself cannot recreate arbitrary Photoshop text, smart objects or effects. Cached composites can differ from recomposition.</li>
+<li><strong>Office pagination:</strong> python-pptx, python-docx, Calamine, openpyxl and XlsxWriter are not Office renderers. No faithful PPTX/DOCX/XLSX-to-PDF route has been verified here. XLSX data readers drop presentation details; writers do not evaluate formulas.</li>
+<li><strong>Wheel closure:</strong> upstream wheels are inputs, not proof that a fully bundled <code>mcruft_&lt;product&gt;</code> wheel exists. Vendor required native libraries and Python dependencies during build, preserve notices and verify imports/rendering without network access. Reject accidental source-build fallbacks; disable OCR/model-download features unless assets are bundled.</li>
+<li><strong>Maintenance:</strong> python-pptx and openpyxl have old releases; svgelements is older still. Recent commits and stars indicate activity/adoption, not correctness. New Rust alternatives need representative document tests before promotion.</li>
+<li><strong>Unverified facts register:</strong> complete Linux/Windows native contents and all-platform dynamic linkage; psd-tools composite-extra wheel closure; canonical ReportLab GitHub star count; maintained Python bindings/wheels for lopdf, pdf-rs, Rust psd, docx-rs, direct skrifa, pptx and ppt-rs; oxidize-pdf's full pinned-core dependency license closure; broad reference-editor fidelity, PDF outlining and round-trip preservation. A missing binding found in research is not proof that none exists.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+          <div class="md-top" data-md-component="top" hidden>
+  <div class="md-top__center">
+    <button type="button" class="md-top__button md-top__button--main" data-md-action="top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+      <span>Back to top</span>
+    </button>
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--nav" for="__drawer" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-left" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </label>
+    
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--toc" for="__toc" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-right" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+      </label>
+    
+  </div>
+</div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://jaywhj.github.io/mkdocs-materialx/" target="_blank" rel="noopener">
+      MaterialX
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+          
+          
+        
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "code": null, "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "search.highlight"], "search": {"options": {"baseUrl": "../..", "bundleUrl": "../../search/", "highlight": true, "searchOptions": {}}, "provider": "pagefind"}, "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "code.collapse": "Collapse", "code.download": "Download", "code.expand": "Expand remaining # lines", "code.select": "Toggle line selection", "search.offline": "Switch to Lunr for offline search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.19ace10b.min.js"></script>
+      
+    
+  </body>
+</html>

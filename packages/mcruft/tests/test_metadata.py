@@ -34,6 +34,23 @@ def test_root_is_installable_core_project():
         *sorted(ROOT.glob("native/*/pyproject.toml")),
     ],
 )
+def test_package_metadata_has_readable_description_and_documentation(path):
+    project = tomllib.loads(path.read_text())["project"]
+    assert len(project["description"]) > 25
+    readme = path.parent / project["readme"]
+    assert "uv pip install" in readme.read_text()
+    assert project["urls"]["Documentation"] == "https://code.twardoch.com/mcruft/"
+    assert project["urls"]["Source"] == "https://github.com/twardoch/mcruft"
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        ROOT / "pyproject.toml",
+        *sorted(ROOT.glob("packages/*/pyproject.toml")),
+        *sorted(ROOT.glob("native/*/pyproject.toml")),
+    ],
+)
 def test_all_extra_covers_every_optional_dependency(path):
     project = tomllib.loads(path.read_text())["project"]
     extras = project["optional-dependencies"]

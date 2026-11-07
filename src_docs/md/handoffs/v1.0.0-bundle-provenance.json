@@ -1,0 +1,32 @@
+[
+  {
+    "product": "vectorcraft",
+    "binary_sha256": "9c7537f4e7c5d4d6b1317568e95f80d999c1f4f5d34ba180a09ea2a7c3c634cb",
+    "licence_files": 23,
+    "matches_published_binary_and_licences": true
+  },
+  {
+    "product": "deckcraft",
+    "binary_sha256": "b1ea957d679c6534a5da7b71036d05de39bd4e43a56f9b790db4925546fb3643",
+    "licence_files": 24,
+    "matches_published_binary_and_licences": true
+  },
+  {
+    "product": "photocraft",
+    "binary_sha256": "73143a2382390bbce1560e660560957be19b28ad107435170b059e771a789bc3",
+    "licence_files": 6,
+    "matches_published_binary_and_licences": true
+  },
+  {
+    "product": "pdfcraft",
+    "binary_sha256": "541f2ca84e6ae7045e9df9f697ea13d551d3c4a5d551971432e82443189f0d5b",
+    "licence_files": 10,
+    "matches_published_binary_and_licences": true
+  },
+  {
+    "product": "designcraft",
+    "binary_sha256": "a97819220b1463b038c03de02742655cd10a3765bf6f0028ae295275d83c5448",
+    "licence_files": 6,
+    "matches_published_binary_and_licences": true
+  }
+]

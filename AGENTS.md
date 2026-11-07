@@ -23,14 +23,14 @@ The brief is `../issues/101.md`. Read it before planning anything.
   - `vectorcraft-cli mcp` without `--headless` first tries to attach to a running GUI on 127.0.0.1. In tests, pass `--headless`, or a read/write root, which implies it.
   - `--automation-read-root` / `--automation-write-root` confine file access. If you omit the write root, the server can't write at all.
   - `photocraft-cli mcp` takes the read/write roots too, but attaches to a running app with `--bridge <127.0.0.1:port>` (plus `--control-token`) rather than `--connect`.
-  - Batch syntax differs: `deckcraft-cli run --cmd 'id={json}'` versus `vectorcraft-cli run --cmd id --params '{json}'`. Index bases and rect conventions also differ per app (see `docs/research/products/README.md`).
+  - Batch syntax differs: `deckcraft-cli run --cmd 'id={json}'` versus `vectorcraft-cli run --cmd id --params '{json}'`. Index bases and rect conventions also differ per app (see `src_docs/md/research/products/README.md`).
   - The installed CLIs (0.10–0.16) are newer than the local checkouts' workspace versions. CLI facts describe the binaries; crate facts describe the checkouts.
   - The user's MCP configs in `~/.claude.json` show the working launch line for each app.
 
 ## Agent tooling & cost
 
 - Work directly in one agent unless the user's current request explicitly asks for agents or delegation. Available CLIs are not permission to spawn agents.
-- If delegation is requested, prefer the subscription CLIs `codex` and `claude`; use at most two concurrent agents with bounded tasks. The loop (brief → dispatch → independent review → controller commits) is in `docs/workflow.md`.
+- If delegation is requested, prefer the subscription CLIs `codex` and `claude`; use at most two concurrent agents with bounded tasks. The loop (brief → dispatch → independent review → controller commits) is in `src_docs/md/workflow.md`.
 - Codex workers never commit (their sandbox cannot reliably write `.git`); the controller lands their diffs after re-running the gates.
 - `SPEC.md` is the binding authority for design questions; `PLAN.md` lists the tasks. Change the spec first, then the code.
 - `gemini-api` is billed per token. Use it only when the others can't do the job.

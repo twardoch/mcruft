@@ -4,7 +4,7 @@ this_file: TODO.md
 
 # Remaining publication work
 
-- [x] Read `docs/handoffs/handoff-2026-10-26-0136.md` before resuming on 2026-10-27.
+- [x] Read `src_docs/md/handoffs/handoff-2026-10-26-0136.md` before resuming on 2026-10-27.
 - [x] Run the publishing tool in preview mode against `.cache/publish-resume-0.1.2` and check the recorded artifact hashes.
 - [x] Retry missing PhotoCraft and VectorCraft `0.1.2` wheels/sdists once with `--publish`; stop if PyPI still returns 429.
 - [x] Verify all twelve `0.1.2` files against PyPI SHA-256 and update the handoff/status report.
@@ -19,3 +19,12 @@ this_file: TODO.md
 - [x] Verify a fresh registry-only `mcruft[all]` installation includes optional libraries, MCP, five working CLI bundles and the native engine (Python 3.12, macOS arm64).
 - [x] Remove the temporary publishing-resume section from `AGENTS.md` (done 2026-11-04).
 - [x] Update release docs after the next stable release.
+
+## Documentation and v1.0.0
+
+- [x] Migrate and expand documentation, verify examples and strict build.
+- [x] Improve metadata/readmes for all twelve distributions.
+- [x] Configure push-triggered docs build into docs and Pages deployment.
+- [ ] Build, inspect and release all twelve distributions at 1.0.0.
+- [ ] Verify registry hashes and fresh mcruft[all] install.
+- [ ] Verify live desktop/mobile navigation and search.

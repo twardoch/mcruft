@@ -1,0 +1,1806 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="One Python API for assembling and converting paged documents, with explicit conversion policies and loss reports.">
+      
+      
+      
+        <link rel="canonical" href="https://code.twardoch.com/mcruft/reference/specification/">
+      
+      
+        <link rel="prev" href="../packages/">
+      
+      
+        <link rel="next" href="../../development/">
+      
+      
+        
+      
+      
+      
+      
+        
+        
+        
+          <link rel="icon" href="../../assets/images/favicon.png">
+        
+      
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-materialx-10.2.2">
+    
+    
+      
+        <title>Specification - mcruft</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d60cbd7.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.a45159b5.min.css">
+      
+    
+    
+
+    
+
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal" data-mx-topbar="glass">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="toc" type="checkbox" id="__toc" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__toc"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mcruft-specification-mvp-v01" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="mcruft" class="md-header__button md-logo" aria-label="mcruft" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mcruft
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0">
+        <div class="md-search-result md-search-result--pagefind" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/twardoch/mcruft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    twardoch/mcruft
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="mcruft" class="md-nav__button md-logo" aria-label="mcruft" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    mcruft
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/twardoch/mcruft" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    twardoch/mcruft
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Get started
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/first-document/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    First document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/export/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Convert and export
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/editing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Edit a page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/mcp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MCP sessions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guide/troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/policies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Policies and packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Python API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../packages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Packages and engines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specification
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#1-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-object-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Object model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mcruft-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. .mcruft package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-engines-and-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Engines and routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Engines and routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-how-pages-are-discovered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect (how pages are discovered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conversion-and-export-matrix-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Conversion and export matrix (MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Conversion and export matrix (MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-outline-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Outline pass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-document-export-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Document export pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-python-api-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Python API (MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-round-trip-to-a-specialist-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Round trip to a specialist engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-time-based-media-batch-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Time-based media (batch 2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-repository-and-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Repository and distributions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-out-of-scope-for-the-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Out of scope for the MVP
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../research/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#1-principles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Principles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-object-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Object model
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-mcruft-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. .mcruft package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-engines-and-routing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Engines and routing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Engines and routing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inspect-how-pages-are-discovered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspect (how pages are discovered)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-conversion-and-export-matrix-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Conversion and export matrix (MVP)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Conversion and export matrix (MVP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-outline-pass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Outline pass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-document-export-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Document export pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-python-api-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Python API (MVP)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-round-trip-to-a-specialist-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Round trip to a specialist engine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-time-based-media-batch-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Time-based media (batch 2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-repository-and-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Repository and distributions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-out-of-scope-for-the-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Out of scope for the MVP
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              
+              
+              <article class="md-content__inner md-typeset" data-pagefind-body>
+                
+                  
+  
+  
+
+
+<h1 id="mcruft-specification-mvp-v01">mcruft specification (MVP, v0.1)<a class="headerlink" href="#mcruft-specification-mvp-v01" title="Permanent link">&para;</a></h1>
+<p>mcruft is a Python API for paged 2D documents. It treats documents as ordered pages that point
+into native files, and it routes each operation to whichever engine can do it: an ArtCraft CLI, an
+ArtCraft MCP server, a native binding to ArtCraft Rust crates, or a third-party format library.
+The engines are means, not the model.</p>
+<p>Evidence: <code>src_docs/md/research/products/</code>, <code>src_docs/md/research/native-libs.md</code>,
+<code>src_docs/md/research/conversion-probe.md</code>, <code>src_docs/md/research/wheels-and-probe-2.md</code>. A route marked ✓ was
+run on the cited input; ~ is documented but not run; ✗ is unsupported, with a reason.</p>
+<h2 id="1-principles">1. Principles<a class="headerlink" href="#1-principles" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Index, don't ingest.</strong> A document is a list of pages, each a reference to a page inside a
+   native asset (<code>deck.pptx#2</code>, <code>art.vectorcraft#0</code>, <code>scan.pdf#5</code>). Assets are stored as they are
+   and are never translated into an internal format.</li>
+<li><strong>Two policies, always.</strong> Every conversion and every export takes <code>policy="editable"</code> (keep
+   structure; may lose appearance) or <code>policy="fidelity"</code> (keep appearance; may lose structure).
+   There is no default: the caller must choose. When a policy is impossible for a route, mcruft
+   raises <code>UnsupportedRoute</code> with the reason. Neither policy is ever silently substituted for the
+   other.</li>
+<li><strong>Losses are data.</strong> Every operation returns a <code>Report</code> with losses and warnings. Engine
+   warnings are passed through verbatim.</li>
+<li><strong>One coordinate convention.</strong> Points (1/72 in), origin top-left, y down; pages are 0-based in
+   the API. Adapters convert: PdfCraft and DesignCraft exports are 1-based; DesignCraft rects are
+   <code>[x0,y0,x1,y1]</code> and DeckCraft rects <code>[x,y,w,h]</code>; pixel images use their DPI metadata, else
+   72 dpi (1 px = 1 pt).</li>
+<li><strong>Small core.</strong> The <code>mcruft</code> core is pure Python, with dependencies limited to <code>pypdf</code>,
+   <code>python-pptx</code> and <code>Pillow</code>. The optional <code>libs</code> extra adds pypdfium2, resvg-py and
+   psd-tools; individual extras are <code>pdf</code>, <code>svg</code> and <code>psd</code>. Product engines are separate packages.</li>
+</ol>
+<h2 id="2-object-model">2. Object model<a class="headerlink" href="#2-object-model" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Document
+  meta: title, created, modified
+  assets: {asset_id: Asset}
+  pages: [Page]
+  media: [Media]                # stored and referenced only in the MVP (§8)
+
+Asset                           # one file inside the package (or an external path before saving)
+  id, path, media_type, sha256
+  role: source | derived | preview
+  derived_from: asset_id | None
+  via: {engine, engine_version, op, policy} | None
+
+Page
+  id, size: (w, h) pt
+  source: {asset: asset_id, index: int}   # page/slide/artboard inside the asset
+  preview: asset_id | None                # single-page PDF (role=preview)
+  frames: [Frame]                         # in memory only; empty in the MVP
+
+Frame                           # discriminated on `kind`; filled by later engines
+  id, kind: text | vector | image | media | group
+  bbox: (x, y, w, h) pt, rotation: deg
+  asset: asset_id | None, text: str | None, children: [Frame], time: (start_s, end_s) | None
+
+Media
+  id, asset, kind: video | audio, duration_s
+</code></pre></div>
+<p>Product mapping: DeckCraft slides, VectorCraft artboards (a multi-page PDF imports as one artboard
+per page, ✓), DesignCraft pages and PdfCraft pages all become a <code>Page</code>. A PhotoCraft image has no
+pages and becomes one implicit page.</p>
+<h2 id="3-mcruft-package">3. <code>.mcruft</code> package<a class="headerlink" href="#3-mcruft-package" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>Talk.mcruft/
+  manifest.json            # the only file mcruft must understand
+  assets/                  # native files, write-once: deck.pptx, poster.vectorcraft, scan.pdf, photo.psd
+  derived/                 # outputs of mcruft operations (provenance in the manifest)
+  previews/page-0000.pdf   # optional single-page PDF per page (Keynote-style thumbnails)
+</code></pre></div>
+<p><code>manifest.json</code>, schema_version 1:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"generator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mcruft 0.1.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Talk"</span><span class="p">,</span><span class="w"> </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-10-25T12:00:00Z"</span><span class="p">,</span><span class="w"> </span><span class="nt">"modified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-10-25T12:00:00Z"</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"assets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"a1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"assets/deck.pptx"</span><span class="p">,</span><span class="w"> </span><span class="nt">"media_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/vnd.openxmlformats-officedocument.presentationml.presentation"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"sha256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="p">,</span><span class="w"> </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"source"</span><span class="p">},</span>
+<span class="w">    </span><span class="nt">"p0"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"previews/page-0000.pdf"</span><span class="p">,</span><span class="w"> </span><span class="nt">"media_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/pdf"</span><span class="p">,</span><span class="w"> </span><span class="nt">"sha256"</span><span class="p">:</span><span class="w"> </span><span class="s2">"…"</span><span class="p">,</span><span class="w"> </span><span class="nt">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"preview"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"derived_from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"via"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"engine"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deckcraft-cli"</span><span class="p">,</span><span class="w"> </span><span class="nt">"engine_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.10.0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"export_pages"</span><span class="p">,</span><span class="w"> </span><span class="nt">"policy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"editable"</span><span class="p">}}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pg0"</span><span class="p">,</span><span class="w"> </span><span class="nt">"size"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">960</span><span class="p">,</span><span class="w"> </span><span class="mi">540</span><span class="p">],</span><span class="w"> </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"asset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"index"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span><span class="w"> </span><span class="nt">"preview"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p0"</span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"media"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Rules:</p>
+<ul>
+<li><strong>Write-once assets.</strong> <code>add_file</code> copies the file into <code>assets/</code> once. If the name is taken, it
+  appends <code>-1</code>, <code>-2</code>, and so on. Saves never rewrite assets. <code>manifest.json</code> is written via a temporary file and <code>os.replace</code>,
+  which is atomic; <code>save(previews=True)</code> regenerates <code>previews/</code> before that. Saving to a new path copies the referenced
+  assets there.</li>
+<li><strong>Trust boundary on load.</strong> Paths must be relative POSIX paths that stay inside the package after
+  resolution. Absolute paths, <code>..</code>, and symlinks are rejected (<code>PackageError</code>). An unknown
+  <code>schema_version</code> raises <code>UnsupportedSchema</code>.</li>
+<li><strong>Hashes.</strong> <code>sha256</code> is checked on load. A mismatch is a warning, because the user may have
+  edited the asset in its own app. <code>doc.refresh()</code> recomputes hashes and drops stale previews.</li>
+<li><strong>Frames are not persisted</strong> in v1; they are recomputed by inspection.</li>
+<li>Paths passed to CLIs are absolute, so a filename starting with <code>-</code> is never read as a flag.</li>
+</ul>
+<h2 id="4-engines-and-routing">4. Engines and routing<a class="headerlink" href="#4-engines-and-routing" title="Permanent link">&para;</a></h2>
+<p>An engine wraps one backend and declares capabilities:</p>
+<div class="highlight"><pre><span></span><code>Capability(op, src, dst, policy, verified_with: "&lt;engine&gt; &lt;version&gt;" | None, note)
+backend kinds: cli | mcp | native | lib
+ops: convert, export_pages, outline_text, build_deck, extract_pages, combine   (+ Engine.inspect(path))
+</code></pre></div>
+<ul>
+<li><code>convert</code> turns a whole file into another format.</li>
+<li><code>export_pages</code> writes selected 0-based pages (<code>opts["pages"]</code>) into one PDF, or into one PNG
+  per page named <code>stem-NNNN.png</code> (<code>opts["dpi"]</code>).</li>
+<li><code>outline_text</code> is the VectorCraft pass in §5.1.</li>
+<li><code>build_deck</code> places PNGs on blank slides (DeckCraft).</li>
+<li><code>extract_pages</code> and <code>combine</code> are PDF page operations (lib: pypdf).</li>
+<li>
+<p>Composite routes (fidelity via the outline pass, pages → deck) live in the core, so no product
+  engine depends on another.</p>
+</li>
+<li>
+<p>Routing picks, among the engines that are available and declare the capability: verified ones
+  first, then the backend order <code>native &gt; lib &gt; cli &gt; mcp</code>. <code>engine="…"</code> pins a choice. <code>lib</code>
+  capabilities count as verified when a unit test covers them.</p>
+</li>
+<li>Engines register through the entry-point group <code>mcruft.engines</code>. The core registers its <code>lib</code>
+  engine; each <code>mcruft_&lt;product&gt;</code> package registers its product engine.</li>
+<li>CLI binary lookup: <code>$MCRUFT_&lt;PRODUCT&gt;_CLI</code>, then the <code>mcruft_&lt;product&gt;_bin</code> package (bundled,
+  §9), then <code>PATH</code>. A missing binary marks the engine unavailable. A version older than the
+  declared <code>min_version</code> adds a warning to the Report.</li>
+<li><strong>MCP</strong> (<code>[mcp]</code> extra, official <code>mcp</code> Python SDK): <code>engine.session()</code> opens
+  <code>&lt;product&gt;-cli mcp</code> over stdio, with <code>--automation-read-root</code> and <code>--automation-write-root</code> set
+  to the roots the caller passes (VectorCraft also gets <code>--headless</code>). It exposes <code>call(tool, args)</code>.
+  It is for interactive multi-step work; no MVP route depends on it. The MVP has one smoke test.</li>
+</ul>
+<h3 id="inspect-how-pages-are-discovered">Inspect (how pages are discovered)<a class="headerlink" href="#inspect-how-pages-are-discovered" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>Engine</th>
+<th>Pages, size</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pdf</td>
+<td>lib: pypdf</td>
+<td>page count, MediaBox</td>
+</tr>
+<tr>
+<td>pptx</td>
+<td>lib: python-pptx</td>
+<td>slide count, slide size</td>
+</tr>
+<tr>
+<td>svg</td>
+<td>lib: XML <code>viewBox</code>/<code>width</code>/<code>height</code></td>
+<td>one page</td>
+</tr>
+<tr>
+<td>png, jpg</td>
+<td>lib: Pillow</td>
+<td>one page, px → pt via DPI</td>
+</tr>
+<tr>
+<td>vectorcraft, ai</td>
+<td>cli: <code>vectorcraft-cli info</code></td>
+<td>artboards</td>
+</tr>
+<tr>
+<td>psd</td>
+<td>lib: psd-tools when installed, else <code>photocraft-cli info</code></td>
+<td>one page, px → pt via resolution (else 72 dpi)</td>
+</tr>
+<tr>
+<td>pcraft</td>
+<td>cli: <code>photocraft-cli info</code></td>
+<td>one page</td>
+</tr>
+<tr>
+<td>idml, designcraft</td>
+<td>cli: <code>designcraft-cli run --in X --cmd document.inspect</code></td>
+<td>pages</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-conversion-and-export-matrix-mvp">5. Conversion and export matrix (MVP)<a class="headerlink" href="#5-conversion-and-export-matrix-mvp" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th><code>editable</code></th>
+<th><code>fidelity</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pptx → pdf</td>
+<td>✓ deckcraft <code>convert</code>: text selectable, fonts embedded; Loss <code>raster</code> (slide art rasterised)</td>
+<td>✓ deckcraft export, then VectorCraft outline pass (§5.1): no font dependency; Loss <code>layout</code></td>
+</tr>
+<tr>
+<td>pptx → png</td>
+<td>✗ raster is not editable</td>
+<td>✓ deckcraft <code>convert</code> / <code>run --export</code> per slide</td>
+</tr>
+<tr>
+<td>pptx → single-slide pdf</td>
+<td>✓ deckcraft <code>run --export x.pdf --export-params {"slides":[i]}</code></td>
+<td>same + outline pass</td>
+</tr>
+<tr>
+<td>pptx ↔ deckcraft</td>
+<td>✓ deckcraft <code>convert</code></td>
+<td>✗ (same route; use editable)</td>
+</tr>
+<tr>
+<td>svg → pdf</td>
+<td>✓ vectorcraft <code>convert</code> (fonts embedded)</td>
+<td>✓ vectorcraft <code>run … type.createOutlines --export</code> (no fonts)</td>
+</tr>
+<tr>
+<td>svg → png</td>
+<td>✗</td>
+<td>✓ vectorcraft <code>convert</code>; ✓ lib resvg-py (extra <code>libs</code>)</td>
+</tr>
+<tr>
+<td>pdf → svg</td>
+<td>✓ vectorcraft <code>convert</code> (text stays <code>&lt;text&gt;</code>)</td>
+<td>✓ vectorcraft <code>run … type.createOutlines --export .svg</code></td>
+</tr>
+<tr>
+<td>pdf → png</td>
+<td>✗</td>
+<td>✓ pdfcraft <code>render --page N</code>; ✓ lib pypdfium2 (extra <code>libs</code>)</td>
+</tr>
+<tr>
+<td>pdf → pdf (outlined)</td>
+<td>n/a</td>
+<td>✓ outline pass, 1-page and 4-page inputs</td>
+</tr>
+<tr>
+<td>pdf → psd</td>
+<td>✗ layers not rebuilt</td>
+<td>✓ vectorcraft <code>convert</code></td>
+</tr>
+<tr>
+<td>png → pdf</td>
+<td>as fidelity (an image has no structure to keep, so both policies use the same route; no Loss)</td>
+<td>✓ photocraft <code>convert</code></td>
+</tr>
+<tr>
+<td>png ↔ psd, psd → pcraft</td>
+<td>✓ photocraft <code>convert</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>png/jpg page → png (<code>export_pages</code>)</td>
+<td>✗</td>
+<td>✓ lib: Pillow (RGBA; ICC profile not kept, reported as Loss <code>effects</code>)</td>
+</tr>
+<tr>
+<td>any page → png (<code>export</code>, <code>render</code>)</td>
+<td>✗ raster targets accept only <code>fidelity</code>; <code>policy="editable"</code> raises <code>UnsupportedRoute</code></td>
+<td>✓ per-source route</td>
+</tr>
+<tr>
+<td>idml/designcraft → pdf, png, pptx</td>
+<td>~ designcraft <code>run --in --export</code> (✓ from <code>--sample</code> only)</td>
+<td>~ same + outline pass</td>
+</tr>
+<tr>
+<td>pages → pptx deck</td>
+<td>✗ no verified pdf→editable-slide route</td>
+<td>✓ render pages to PNG, deckcraft <code>run</code> with blank slides + full-bleed <code>insert.picture</code></td>
+</tr>
+<tr>
+<td>extract / combine pdf pages</td>
+<td>✓ lib: pypdf</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<h3 id="51-outline-pass">5.1 Outline pass<a class="headerlink" href="#51-outline-pass" title="Permanent link">&para;</a></h3>
+<p>The pass runs <code>vectorcraft-cli run --in in.pdf --cmd select.all --cmd type.createOutlines --export
+out.pdf</code>. It is verified for 1-page and 4-page PDFs (no <code>/FontFile</code> remains). Because VectorCraft
+re-imports the PDF, the Report always adds <code>Loss(kind="layout", detail="re-imported via
+VectorCraft: links, annotations and forms may be dropped")</code> and passes VectorCraft's warnings
+through, for example CMYK conversion of RGB images.</p>
+<h3 id="52-document-export-pipeline">5.2 Document export pipeline<a class="headerlink" href="#52-document-export-pipeline" title="Permanent link">&para;</a></h3>
+<p><code>doc.export(path, policy=…)</code> over pages from several assets proceeds as follows:</p>
+<ol>
+<li>Group consecutive pages by source asset.</li>
+<li>Export each asset's pages to PDF. mcruft tries, in order:</li>
+<li><code>export_pages</code> with the requested policy;</li>
+<li><code>export_pages</code> with the editable policy (the fidelity variant is the outline pass in step 5);</li>
+<li>for single-page sources, <code>convert</code> to PDF.</li>
+</ol>
+<p>Raster sources (png, jpg, psd, pcraft) use their only route, which is fidelity, for both
+   policies (see the png → pdf row).
+3. Extract the needed page indexes (pypdf).
+4. Combine in document order (pypdf) into a temporary file in the target directory.
+5. If <code>fonts="outline"</code>, run the outline pass on the result.
+6. Move the result onto the target with <code>os.replace</code>. A failed export leaves no file at the
+   target. A target path that is one of the document's assets is refused (<code>PackageError</code>).
+   <code>Page.render</code> and PNG export write through a temporary directory and never touch other files
+   next to the target.</p>
+<p><code>policy="fidelity"</code> implies <code>fonts="outline"</code> and <code>policy="editable"</code> implies <code>fonts="embed"</code>.
+The caller may override <code>fonts</code>. A <code>.png</code> target writes <code>stem-0000.png</code>, and so on, one per page;
+a <code>.pptx</code> target uses the pages → deck route.</p>
+<h2 id="6-python-api-mvp">6. Python API (MVP)<a class="headerlink" href="#6-python-api-mvp" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">mcruft</span>
+
+<span class="n">doc</span> <span class="o">=</span> <span class="n">mcruft</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>                       <span class="c1"># .mcruft folder, or any inspectable file (1-asset doc, unsaved)</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">mcruft</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">"Talk"</span><span class="p">)</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">add_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Page</span><span class="p">]</span>              <span class="c1"># copies the file in on save; appends its pages</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">remove_pages</span><span class="p">(</span><span class="n">indexes</span><span class="p">);</span> <span class="n">doc</span><span class="o">.</span><span class="n">move_page</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Document</span><span class="p">]</span>                 <span class="c1"># manifest-level: one doc per page, sharing asset files</span>
+<span class="n">mcruft</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span>                <span class="c1"># manifest-level concatenation</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">previews</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span> <span class="c1"># previews = single-page PDFs via the editable export (fonts embedded, no outline pass)</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Report</span>
+
+<span class="n">doc</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">pages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fonts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span>      <span class="c1"># .pdf, .png, .svg (1 page), .pptx</span>
+<span class="n">mcruft</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span>
+<span class="c1"># Without a convert capability, use export_pages at the same policy: multi-page PNG outputs are stem-NNNN.png; a single page writes exactly dst.</span>
+<span class="n">mcruft</span><span class="o">.</span><span class="n">convert_editable</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span>   <span class="c1"># == convert(policy="editable")</span>
+<span class="n">mcruft</span><span class="o">.</span><span class="n">convert_fidelity</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span>   <span class="c1"># == convert(policy="fidelity")</span>
+<span class="n">page</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span>          <span class="c1"># always fidelity</span>
+
+<span class="n">mcruft</span><span class="o">.</span><span class="n">engines</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">EngineInfo</span><span class="p">]</span>          <span class="c1"># name, kind, available, version, capabilities</span>
+
+<span class="n">Report</span><span class="p">:</span> <span class="n">op</span><span class="p">,</span> <span class="n">policy</span><span class="p">,</span> <span class="n">engine</span><span class="p">,</span> <span class="n">engine_version</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">losses</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Loss</span><span class="p">],</span> <span class="n">warnings</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="n">Loss</span><span class="p">:</span> <span class="n">kind</span> <span class="p">(</span><span class="s2">"raster"</span><span class="o">|</span><span class="s2">"fonts"</span><span class="o">|</span><span class="s2">"layout"</span><span class="o">|</span><span class="s2">"effects"</span><span class="o">|</span><span class="s2">"media"</span><span class="o">|</span><span class="s2">"unsupported"</span><span class="p">),</span> <span class="n">detail</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Errors: <code>McruftError</code> → <code>UnsupportedRoute</code>, <code>EngineUnavailable</code>, <code>EngineFailed</code> (non-zero exit;
+includes the stderr tail and the command line), <code>UnsupportedSchema</code>, <code>PackageError</code>.</p>
+<h2 id="7-round-trip-to-a-specialist-engine">7. Round trip to a specialist engine<a class="headerlink" href="#7-round-trip-to-a-specialist-engine" title="Permanent link">&para;</a></h2>
+<p>MVP: <strong>page-level only.</strong> <code>with page.edit_in("photocraft") as path:</code></p>
+<ol>
+<li>Produces a working file that the engine can edit.</li>
+<li>If the engine natively reads the source asset's format (DeckCraft: pptx/deckcraft;
+     PhotoCraft: png/jpg/psd/pcraft; VectorCraft: svg/ai/vectorcraft/pdf; PdfCraft: pdf;
+     DesignCraft: idml/designcraft), the working file is a copy of the whole asset, and the page
+     keeps its index.</li>
+<li>Otherwise the page is converted once, with the <strong>editable</strong> policy, to the engine's format:
+     PhotoCraft gets <code>.psd</code>, VectorCraft <code>.vectorcraft</code>, PdfCraft a single-page <code>.pdf</code>. The page
+     index becomes 0.</li>
+<li>If no editable route exists, mcruft raises <code>UnsupportedRoute</code>. It never hands over a
+     rasterised picture as an "editable" page.</li>
+<li>Yields the path for the caller (CLI, MCP session or GUI) to edit.</li>
+<li>On exit, if the hash changed, adds the file as a <code>derived</code> asset with provenance and points
+   <code>page.source</code> at it. Later exports use the edited asset, and the preview is dropped.</li>
+</ol>
+<p>Frame-level write-back into the original asset (placing edited content back with
+<code>insert.picture</code>, <code>file.place</code> or <code>page_add_image</code>) is designed but deferred.</p>
+<h2 id="8-time-based-media-batch-2">8. Time-based media (batch 2)<a class="headerlink" href="#8-time-based-media-batch-2" title="Permanent link">&para;</a></h2>
+<p>The MVP stores video and audio files as <code>Media</code> assets. Planned operations, using FilmCraft,
+EffectCraft and SoundCraft:</p>
+<ul>
+<li><code>media.keyframes_to_pages(times)</code>: still renders become image pages.</li>
+<li><code>doc.pages_to_keyframes()</code>: page renders become a video timeline.</li>
+<li>Media frames embedded on slides.</li>
+</ul>
+<h2 id="9-repository-and-distributions">9. Repository and distributions<a class="headerlink" href="#9-repository-and-distributions" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pyproject.toml                  core package metadata (installable workspace root)
+packages/mcruft/                 core (model, package I/O, router, Report, lib engine, CLI + MCP runners)
+packages/mcruft_&lt;product&gt;/       ×5: engine declaration + command adapters (pure Python, entry point)
+native/mcruft_pdfcraft_native/   maturin/PyO3 proof binding; NOT a uv workspace member
+tools/bundle_cli.py              builds the mcruft-&lt;product&gt;-bin wheels
+</code></pre></div>
+<ul>
+<li><strong>Distributions.</strong></li>
+<li><code>mcruft</code> (pure). This is the metapackage: <code>mcruft[engines]</code> pulls in the five
+    <code>mcruft-&lt;product&gt;</code> packages, and <code>mcruft[mcp]</code> adds the MCP SDK.</li>
+<li><code>mcruft-&lt;product&gt;</code> (pure, <code>py3-none-any</code>), each with a <code>[bundled]</code> extra that pulls in
+    <code>mcruft-&lt;product&gt;-bin</code>.</li>
+<li><code>mcruft-&lt;product&gt;-bin</code>, a separate distribution: a platform wheel containing
+    <code>mcruft_&lt;product&gt;_bin/bin/&lt;product&gt;-cli</code>, thinned to one architecture, plus a NOTICE, and the
+    product's LICENSE and ATTRIBUTION when <code>--license-dir</code> supplies them (the builder warns otherwise).</li>
+<li>The MVP builds <code>macosx_11_0_arm64</code> only. The arm64 VectorCraft wheel is about 54 MB, under
+    PyPI's 100 MB default file limit; a universal one would not be.</li>
+<li><strong>Native binding.</strong> Pin every crate from one repo to the commit of the release tag that matches
+  the installed CLI. Link only model, format, render and pdf-level crates. Copy only the <code>hayro</code>
+  and <code>lopdf</code> <code>[patch.crates-io]</code> entries. The proof binding covers PdfCraft page count, extract
+  and combine. It is built on demand (<code>maturin build</code>), not by <code>uv sync</code>.</li>
+<li>
+<p><strong>Installation.</strong> The workspace root installs the core. Every distribution exposes
+  <code>all</code>; <code>mcruft[all]</code> includes all engine extras, CLI bundles, optional libraries,
+  MCP and the PdfCraft native extension. The installer uses <code>--no-config</code> to bypass
+  source-workspace exclusions for unpublished binary/native wheels.</p>
+</li>
+<li>
+<p><strong>Release tooling.</strong> All twelve distributions use the 1.0.0 release version. Six pure-Python workspace packages share canonical <code>vMAJOR.MINOR.PATCH</code>
+  tags and generated hatch-vcs version files. Clean-tree gates precede a changelog stamp and
+  gitnextver commit/tag/push, then GitHub assets and optional PyPI uploads. Bundled CLI wheels
+  and the native crate are built separately on macOS arm64; the CLI builder accepts
+  an explicit packaging version while recording the unchanged upstream executable version.</p>
+</li>
+<li><strong>Publication recovery.</strong> <code>tools/resume_publish.py</code> previews a stable release's six
+  pure-Python wheels and sdists, checks existing PyPI hashes, and requires <code>--publish</code>
+  to upload missing artifacts. It never builds or versions packages, refuses hash
+  conflicts, disables automatic HTTP retries and verifies publication afterward.</li>
+</ul>
+<h2 id="10-out-of-scope-for-the-mvp">10. Out of scope for the MVP<a class="headerlink" href="#10-out-of-scope-for-the-mvp" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Batch-2 products.</li>
+<li>Write routes through the libraries (pypdf-based authoring, psd-tools saving) are deferred.</li>
+<li>Text editing: the planned <code>frame.set_text(str)</code> routes to DeckCraft <code>text.set</code> and DesignCraft
+  <code>story.setText</code>.</li>
+<li>Frame-level write-back.</li>
+<li>Populated <code>frames</code>.</li>
+<li>A layout engine.</li>
+<li>Zipped packages.</li>
+<li>x86_64, Linux and Windows binary wheels.</li>
+<li>MCP-driven GUI automation.</li>
+<li>Faithful Office rendering outside the ArtCraft engines.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+          <div class="md-top" data-md-component="top" hidden>
+  <div class="md-top__center">
+    <button type="button" class="md-top__button md-top__button--main" data-md-action="top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+      <span>Back to top</span>
+    </button>
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--nav" for="__drawer" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-left" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </label>
+    
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--toc" for="__toc" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-right" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+      </label>
+    
+  </div>
+</div>
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../packages/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Packages and engines">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Packages and engines
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../development/" class="md-footer__link md-footer__link--next" aria-label="Next: Development">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Development
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://jaywhj.github.io/mkdocs-materialx/" target="_blank" rel="noopener">
+      MaterialX
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+          
+          
+        
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "code": null, "features": ["navigation.sections", "navigation.top", "navigation.footer", "toc.follow", "content.code.copy", "search.highlight"], "search": {"options": {"baseUrl": "../..", "bundleUrl": "../../search/", "highlight": true, "searchOptions": {}}, "provider": "pagefind"}, "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "code.collapse": "Collapse", "code.download": "Download", "code.expand": "Expand remaining # lines", "code.select": "Toggle line selection", "search.offline": "Switch to Lunr for offline search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.19ace10b.min.js"></script>
+      
+    
+  </body>
+</html>

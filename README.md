@@ -1,131 +1,119 @@
----
-this_file: README.md
----
+<!-- this_file: README.md -->
 
 # mcruft
 
-One Python API for slide decks, PDFs, vector art, layouts and images. Behind it are the
-ArtCraft apps, open-source clones of software with decades of cruft.
+Assemble pages from PDFs, slide decks, vector artwork and images through one Python API.
+Keep native source files, choose between editability and visual fidelity, and inspect
+what each conversion loses.
+
+[Documentation](https://code.twardoch.com/mcruft/) ·
+[Python API](https://code.twardoch.com/mcruft/reference/api/) ·
+[PyPI](https://pypi.org/project/mcruft/) ·
+[Issues](https://github.com/twardoch/mcruft/issues)
+
+## Install
+
+Python 3.12 or later, in a virtual environment:
+
+```bash
+uv pip install mcruft                   # inspect and assemble PDFs; inspect PPTX/SVG/images
+uv pip install 'mcruft[libs]'           # add PDF/SVG rendering and PSD inspection
+uv pip install 'mcruft[engines]'        # five adapters; supply the product CLIs
+uv pip install 'mcruft[all]==1.0.0'     # everything, including binaries (macOS arm64 only)
+```
+
+`pip install` accepts the same names. The core and adapters are pure Python.
+The five bundled CLI wheels and native PDF binding currently support **macOS arm64 only**;
+`[all]` fails to resolve elsewhere. On other platforms, install core or adapters and
+provide compatible CLIs. Those product runtimes have not been tested here.
+No package downloads a product binary at runtime.
+
+## Assemble a document
 
 ```python
 import mcruft
 
-doc = mcruft.new("Talk")
-doc.add_file("deck.pptx")  # two slides -> two pages
-doc.add_file("poster.svg")  # one more page
-doc.save("Talk.mcruft", previews=True)
-
-doc.export("talk.pdf", policy="editable")  # selectable text, fonts embedded
-doc.export("talk-print.pdf", policy="fidelity")  # fonts outlined, looks the same everywhere
-doc.export("talk.png", policy="fidelity", dpi=72)  # talk-0000.png, talk-0001.png, ...
-doc.export("talk-images.pptx", policy="fidelity")  # one picture per slide
+doc = mcruft.open("input.pdf")
+doc.add_file("appendix.pdf")
+doc.move_page(0, len(doc.pages) - 1)
+doc.save("assembled.mcruft")
+report = doc.export("assembled.pdf", policy="editable")
+print(report.outputs)
+for loss in report.losses:
+    print(loss.kind, loss.detail)
 ```
 
-Every conversion asks you to choose: `editable` keeps the structure and may lose appearance;
-`fidelity` keeps the appearance and may lose the structure. Each call returns a `Report` that
-lists what was lost, for example `raster` when DeckCraft rasterises slide art, or `layout` when a
-PDF is re-imported to outline its fonts. A route that cannot honour a policy raises
-`UnsupportedRoute` instead of quietly doing the other thing.
+This example needs only core. Pages are zero-based. A `.mcruft` file is a folder:
+`manifest.json` orders page references, `assets/` preserves native files, `derived/`
+holds generated edits, and `previews/` optionally holds single-page PDFs.
 
-## The `.mcruft` package
+[Run the self-contained first-document tutorial](https://code.twardoch.com/mcruft/guide/first-document/).
 
-A `.mcruft` file is a folder:
+## Convert with an explicit policy
 
-- `manifest.json` lists the pages and the native files they point into, for example
-  `deck.pptx#1` or `poster.svg#0`.
-- `assets/` holds those native files, copied in once and never rewritten.
-- `derived/` holds files that mcruft produced, each with its provenance recorded.
-- `previews/` holds optional single-page PDFs, one per page, in the manner of old Keynote.
+```python
+report = mcruft.convert("art.svg", "art.pdf", policy="editable")  # requires VectorCraft
+report = mcruft.convert("art.svg", "art.png", policy="fidelity")  # resvg-py or VectorCraft
+```
 
-mcruft never translates your files into a format of its own. See [SPEC.md](SPEC.md) §3.
+`editable` keeps usable structure where supported; `fidelity` prioritises appearance,
+possibly outlining text or rasterising pages. Each operation returns a `Report` with
+outputs, backend/version, losses and warnings. Unsupported routes raise `UnsupportedRoute`.
+Neither policy promises a lossless round trip.
 
-## Engines
+PDF fidelity exports use a VectorCraft outline pass, which can drop links, annotations
+and forms. PNG only accepts fidelity. Image-based PPTX exports need DeckCraft and keep
+appearance as slide-sized pictures. See the
+[tested conversion matrix](https://code.twardoch.com/mcruft/reference/specification/#5-conversion-and-export-matrix-mvp).
 
-| Package | Wraps | Does |
-|---|---|---|
-| `mcruft` | pypdf, python-pptx, Pillow | inspect pdf/pptx/svg/png; extract and combine PDF pages |
-| `mcruft-vectorcraft` | `vectorcraft-cli` | svg/pdf/ai/vectorcraft conversion, PDF import as vectors, **outlining text** |
-| `mcruft-deckcraft` | `deckcraft-cli` | pptx/deckcraft, slide export to PDF/PNG, decks built from images |
-| `mcruft-photocraft` | `photocraft-cli` | png/jpg/psd/pcraft conversion |
-| `mcruft-pdfcraft` | `pdfcraft-cli` | page rendering and extraction |
-| `mcruft-pdfcraft` (`pdfcraft-native`) | optional `mcruft_pdfcraft_native` binding | native PDF extraction and combination |
-| `mcruft-designcraft` | `designcraft-cli` | idml/designcraft to pdf, pptx and png |
+## Choose an engine
 
-The router picks an engine by capability, in the order verified, native, library, CLI, MCP.
-`mcruft.engines()` shows what is installed. The tested routes are in [SPEC.md](SPEC.md) §5.
-`mcruft[libs]` adds pypdfium2, resvg-py and psd-tools to the library engine, which the router prefers over CLIs.
-Each CLI is found through `$MCRUFT_<PRODUCT>_CLI`, then a bundled `mcruft-<product>-bin` wheel,
-then `PATH`. `engine.session()` opens the product's MCP server for interactive work
-(`mcruft[mcp]`).
+| Adapter | Purpose |
+| --- | --- |
+| `mcruft-vectorcraft` | SVG/PDF/AI/vectorcraft conversion, text outlining |
+| `mcruft-deckcraft` | PPTX/deckcraft conversion, PDF/PNG slides, decks from images |
+| `mcruft-photocraft` | PNG/JPEG/PSD/pcraft conversion |
+| `mcruft-pdfcraft` | PDF rendering/extraction, optional native page operations |
+| `mcruft-designcraft` | IDML/designcraft exports (sample-based verification) |
 
-## Install
+Each adapter's `[bundled]` extra adds its `mcruft-<product>-bin` wheel. PdfCraft's
+`[native]` extra adds `mcruft-pdfcraft-native`. Every distribution exposes `[all]`.
+Bundle release versions describe packaging; embedded CLI versions retain upstream numbers.
 
-`pip install "mcruft[engines]"` installs core and the five engine packages (`0.1.3` on PyPI).
-The CLIs themselves must be on PATH or set via `$MCRUFT_<PRODUCT>_CLI`.
-Core, all five engines, all five CLI bundles and the native binding are on PyPI.
-From a source clone:
+```python
+for engine in mcruft.engines():
+    print(engine.name, engine.available, engine.version)
+```
+
+CLI lookup: `$MCRUFT_<PRODUCT>_CLI`, then bundled wheel, then `PATH`.
+The router prefers verified capabilities, then native, library, CLI and MCP backends.
+`engine.session()` exposes the product's MCP API with `mcruft[mcp]` installed.
+
+## Scope
+
+The MVP covers paged 2D documents and page-level editing handoffs. Frame editing,
+frame write-back, video/audio processing and batch-2 products remain future work.
+Reference-product file support is bounded by the engines, not full application compatibility.
+
+## Develop
 
 ```bash
-./install.sh
-python3 -c "import mcruft; print([(e.name, e.available) for e in mcruft.engines()])"
+uv sync --locked --all-packages --all-extras
+uv run ruff check .
+uv run ruff format --check .
+uv run pytest -q
+./build.sh
 ```
 
-`mcruft[engines]` installs the core and all five engine packages.
-Every distribution provides an `all` extra. `mcruft[all]` includes all engines,
-MCP, PDF/SVG/PSD libraries, each engine's bundled CLI and the PdfCraft native binding.
-The bundled CLI and native wheels are macOS arm64 only (no sdist), so `mcruft[all]` fails to
-resolve on other platforms rather than silently dropping them; use `mcruft[engines]` there and
-put the CLIs on PATH. Install everything with:
+`./install.sh` installs local engines and extras; it can use wheels in `dist/`.
+`./build.sh` builds six pure-Python wheels and sdists. The native binding and licensed
+CLI bundles have separate builders. See the
+[development guide](https://code.twardoch.com/mcruft/development/).
 
-```bash
-uv pip install --system 'mcruft[all]'
-```
+Documentation source is `src_docs/md`, configured by `src_docs/mkdocs.yml`.
+Pushes to main build ProperDocs + MaterialX into `docs/` and deploy GitHub Pages.
+Release tags use hatch-vcs; `./release.sh [patch|minor|major]` gates and releases
+through gitnextver. Publication requires configured credentials.
 
-To rebuild the binary wheels, use `tools/bundle_cli.py <product> --binary <cli> --license-dir <unzipped release>`
-(the official CLI zip minus the binary supplies the licence files) and the native wheel
-with `maturin build -i python3 --manifest-path native/mcruft_pdfcraft_native/Cargo.toml --out dist`.
-Run `./install.sh` to include those local wheels (it searches `dist/` when present). Without them,
-installation fails rather than silently dropping dependencies. `install.sh` uses
-`--no-config` so workspace exclusions cannot silently omit wheels.
-The workspace retains exclusions for unpublished wheels so `uv sync` can bootstrap
-source development; when installing `[all]` manually from inside this checkout,
-add `--no-config` too. Published package metadata contains no such exclusions.
-
-The ArtCraft CLIs (macOS) come from the ArtCraft releases. To bundle one into its own wheel,
-run `uv run python tools/bundle_cli.py <product>`. That writes a separate
-`mcruft_<product>_bin-<version>-py3-none-macosx_11_0_arm64.whl` (29–51 MB) containing the
-binary and a NOTICE, with nothing to download at run time. `native/mcruft_pdfcraft_native` is a proof PyO3 binding to pinned
-PdfCraft crates, built with `maturin build`.
-
-## Not yet
-
-These are not in the MVP:
-
-- Text editing (`frame.set_text`).
-- Frame-level round trips.
-- Video and audio operations. FilmCraft, EffectCraft and SoundCraft are in batch 2, along with
-  WordCraft, FigCraft, CADCraft, GridCraft and LightCraft.
-- Linux and Windows binary wheels.
-
-## Development
-
-`uv run python tools/resume_publish.py` previews a release's missing PyPI files; uploads require `--publish`.
-
-`uv pip install --system --upgrade -e .` installs the core from the repository root.
-`./install.sh` also installs all five local engines, MCP/library extras and development
-tools into the system Python. Use `uv sync --all-packages --all-extras` for an isolated workspace.
-`./build.sh` rebuilds six wheels and six sdists in `dist/` (no CLI bundles or native crate).
-Run `uv run ruff check .`,
-`uv run ruff format --check .` and
-`uv run pytest -q` before release.
-`./release.sh [patch|minor|major]` gates a clean tree, stamps the changelog, commits/tags/pushes via gitnextver and uploads GitHub assets.
-`./publish.sh [patch|minor|major]` releases an untagged HEAD or checks a tagged HEAD, then builds and uploads to PyPI.
-Publishing uses `UV_PUBLISH_TOKEN` (or `PYPI_TOKEN` from `~/.env` when needed).
-Tag pushes (`vMAJOR.MINOR.PATCH`) and manual release dispatch run the release workflow; PyPI is skipped without its token.
-
-- How agents work on this repo: [docs/workflow.md](docs/workflow.md).
-- Research behind the design: [docs/research/](docs/research/).
-- Rules for agents: [AGENTS.md](AGENTS.md).
-
-Licence: Apache-2.0. The ArtCraft apps are MIT OR Apache-2.0 and belong to their authors.
-mcruft names them only to say what it drives.
+Licence: Apache-2.0. Bundled upstream code retains its own licences and attribution.
+Product names describe the engines mcruft drives; they do not imply affiliation.

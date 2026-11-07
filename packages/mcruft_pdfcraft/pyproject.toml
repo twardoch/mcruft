@@ -2,10 +2,16 @@
 [project]
 license = "Apache-2.0"
 name = "mcruft-pdfcraft"
-description = "PdfCraft engine for mcruft"
+description = "PDF page rendering and extraction engines for mcruft"
+readme = "README.md"
 dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = ["mcruft", "pypdf"]
+
+[project.urls]
+Documentation = "https://code.twardoch.com/mcruft/"
+Source = "https://github.com/twardoch/mcruft"
+Issues = "https://github.com/twardoch/mcruft/issues"
 
 [project.optional-dependencies]
 all = ["mcruft-pdfcraft[bundled,native]"]

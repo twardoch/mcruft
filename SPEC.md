@@ -9,8 +9,8 @@ into native files, and it routes each operation to whichever engine can do it: a
 ArtCraft MCP server, a native binding to ArtCraft Rust crates, or a third-party format library.
 The engines are means, not the model.
 
-Evidence: `docs/research/products/`, `docs/research/native-libs.md`,
-`docs/research/conversion-probe.md`, `docs/research/wheels-and-probe-2.md`. A route marked ✓ was
+Evidence: `src_docs/md/research/products/`, `src_docs/md/research/native-libs.md`,
+`src_docs/md/research/conversion-probe.md`, `src_docs/md/research/wheels-and-probe-2.md`. A route marked ✓ was
 run on the cited input; ~ is documented but not run; ✗ is unsupported, with a reason.
 
 ## 1. Principles
@@ -299,10 +299,11 @@ tools/bundle_cli.py              builds the mcruft-<product>-bin wheels
   MCP and the PdfCraft native extension. The installer uses `--no-config` to bypass
   source-workspace exclusions for unpublished binary/native wheels.
 
-- **Release tooling.** Six pure-Python workspace packages share canonical `vMAJOR.MINOR.PATCH`
+- **Release tooling.** All twelve distributions use the 1.0.0 release version. Six pure-Python workspace packages share canonical `vMAJOR.MINOR.PATCH`
   tags and generated hatch-vcs version files. Clean-tree gates precede a changelog stamp and
   gitnextver commit/tag/push, then GitHub assets and optional PyPI uploads. Bundled CLI wheels
-  and the native crate are excluded; tooling runs only when explicitly invoked.
+  and the native crate are built separately on macOS arm64; the CLI builder accepts
+  an explicit packaging version while recording the unchanged upstream executable version.
 - **Publication recovery.** `tools/resume_publish.py` previews a stable release's six
   pure-Python wheels and sdists, checks existing PyPI hashes, and requires `--publish`
   to upload missing artifacts. It never builds or versions packages, refuses hash

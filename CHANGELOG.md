@@ -6,6 +6,13 @@ this_file: CHANGELOG.md
 
 ## Unreleased
 
+- Move authored documentation into src_docs/md, add complete user guides and references,
+  and build ProperDocs + MaterialX into docs on main pushes with Pages deployment.
+- Add readable PyPI descriptions, Markdown READMEs and project links for all twelve
+  distributions. Allow CLI bundle package versions to differ from upstream executables,
+  preserving executable versions and licence provenance.
+- Prepare all core, adapter, bundle and native distributions for the 1.0.0 release.
+
 - Document verified PyPI-only installation of `mcruft[all]==0.1.3`, including
   five bundled CLIs, optional libraries and native PDF extraction/combination.
 

@@ -1,0 +1,63 @@
+# this_file: src_docs/mkdocs.yml
+site_name: mcruft
+site_description: One Python API for assembling and converting paged documents, with explicit conversion policies and loss reports.
+site_url: https://code.twardoch.com/mcruft/
+repo_url: https://github.com/twardoch/mcruft
+repo_name: twardoch/mcruft
+edit_uri: edit/main/src_docs/md/
+docs_dir: md
+site_dir: ../docs
+exclude_docs: |
+  handoffs/
+not_in_nav: |
+  workflow.md
+  research/conversion-probe.md
+  research/wheels-and-probe-2.md
+  research/native-libs.md
+  research/vendors.md
+  research/products/
+theme:
+  name: materialx
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - content.code.copy
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle: {icon: material/brightness-7, name: Switch to dark mode}
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle: {icon: material/brightness-4, name: Switch to light mode}
+plugins:
+  - materialx/search
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - toc: {permalink: true}
+  - pymdownx.highlight
+  - pymdownx.superfences
+nav:
+  - Overview: index.md
+  - Get started:
+      - Installation: guide/install.md
+      - First document: guide/first-document.md
+  - Guides:
+      - Convert and export: guide/export.md
+      - Edit a page: guide/editing.md
+      - MCP sessions: guide/mcp.md
+      - Troubleshooting: guide/troubleshooting.md
+  - Explanation:
+      - Policies and packages: explanation/policies.md
+  - Reference:
+      - Python API: reference/api.md
+      - Packages and engines: reference/packages.md
+      - Specification: reference/specification.md
+  - Development: development/index.md
+  - Research: research/index.md

@@ -7,14 +7,16 @@ import io
 import subprocess
 import sys
 import zipfile
+from email.parser import Parser
 from pathlib import Path
 
 import pytest
 
 
 @pytest.mark.parametrize("with_licenses", [False, True])
+@pytest.mark.parametrize("version", [None, "1.0.0"])
 def test_bundle_when_fake_binary_then_valid_wheel_and_record(
-    tmp_path, monkeypatch, capsys, with_licenses
+    tmp_path, monkeypatch, capsys, with_licenses, version
 ):
     tool = Path(__file__).resolve().parents[3] / "tools/bundle_cli.py"
     spec = importlib.util.spec_from_file_location("bundle_cli", tool)
@@ -28,13 +30,18 @@ def test_bundle_when_fake_binary_then_valid_wheel_and_record(
     licenses.mkdir()
     (licenses / "LICENSE").write_text("Test license")
     wheel = module.bundle(
-        "pdfcraft", binary, tmp_path, license_dir=licenses if with_licenses else None
+        "pdfcraft",
+        binary,
+        tmp_path,
+        license_dir=licenses if with_licenses else None,
+        version=version,
     )
     warning = capsys.readouterr().err
     assert ("warning" in warning.lower() and "license-dir" in warning) == (not with_licenses)
-    assert wheel.name == "mcruft_pdfcraft_bin-0.13.0-py3-none-macosx_11_0_arm64.whl"
+    expected_version = version or "0.13.0"
+    assert wheel.name == f"mcruft_pdfcraft_bin-{expected_version}-py3-none-macosx_11_0_arm64.whl"
     with zipfile.ZipFile(wheel) as archive:
-        info = "mcruft_pdfcraft_bin-0.13.0.dist-info"
+        info = f"mcruft_pdfcraft_bin-{expected_version}.dist-info"
         for name, digest, size in csv.reader(io.StringIO(archive.read(f"{info}/RECORD").decode())):
             if digest:
                 data = archive.read(name)
@@ -46,6 +53,14 @@ def test_bundle_when_fake_binary_then_valid_wheel_and_record(
         assert "Root-Is-Purelib: false" in archive.read(f"{info}/WHEEL").decode()
         assert "Provides-Extra: all" in archive.read(f"{info}/METADATA").decode()
         assert "Name: mcruft-pdfcraft-bin" in archive.read(f"{info}/METADATA").decode()
+        metadata = Parser().parsestr(archive.read(f"{info}/METADATA").decode())
+        assert metadata["Version"] == expected_version
+        assert metadata["Summary"] == "Bundled pdfcraft-cli for mcruft on macOS arm64"
+        assert metadata["License-Expression"] == "MIT OR Apache-2.0"
+        assert metadata["Description-Content-Type"] == "text/markdown"
+        assert "Documentation, https://code.twardoch.com/mcruft/" in metadata.get_all("Project-URL")
+        assert "# mcruft-pdfcraft-bin" in metadata.get_payload()
+        assert "uv pip install" in metadata.get_payload()
         notice = archive.read(f"{info}/NOTICE").decode()
         for expected in (
             "pdfcraft",
@@ -78,3 +93,13 @@ def test_bundle_when_fake_binary_then_valid_wheel_and_record(
         text=True,
     )
     assert "0.13.0" in check.stdout
+
+
+@pytest.mark.parametrize("version", ["../1.0.0", "1.0.0\nName: other", "01.0.0", "1.0", "1.0.0rc1"])
+def test_bundle_when_invalid_release_version_then_refuses_before_running_binary(tmp_path, version):
+    tool = Path(__file__).resolve().parents[3] / "tools/bundle_cli.py"
+    spec = importlib.util.spec_from_file_location("bundle_cli", tool)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    with pytest.raises(ValueError, match="stable MAJOR.MINOR.PATCH"):
+        module.bundle("pdfcraft", tmp_path / "missing", version=version)

@@ -26,3 +26,10 @@ The workspace excludes unpublished binary/native wheels for source development.
 The installer uses `--no-config` to honour all dependencies. Each package exposes
 an `all` extra; `mcruft[all]` includes the five CLI bundles and PdfCraft native binding.
 VectorCraft and PdfCraft declare their direct `pypdf` imports as package dependencies.
+
+## Documentation build
+
+`src_docs/requirements.in` pins ProperDocs 1.6.7 and MaterialX 10.2.2; the compiled
+requirements.txt pins their transitive dependencies. ProperDocs builds Markdown to
+static HTML; MaterialX supplies responsive navigation, code copying, dark mode and search.
+The documentation environment is separate from runtime dependencies.

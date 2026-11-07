@@ -2,10 +2,16 @@
 [project]
 license = "Apache-2.0"
 name = "mcruft"
-description = "Unified document API for paged media"
+description = "Assemble, convert and export paged documents with explicit editability and fidelity policies"
+readme = "README.md"
 dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = ["pypdf", "python-pptx", "Pillow"]
+
+[project.urls]
+Documentation = "https://code.twardoch.com/mcruft/"
+Source = "https://github.com/twardoch/mcruft"
+Issues = "https://github.com/twardoch/mcruft/issues"
 
 [project.optional-dependencies]
 all = [

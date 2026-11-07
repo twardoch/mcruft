@@ -32,17 +32,17 @@ Python/Rust format libraries, stored in a `.mcruft` package folder.
 ## Tasks
 
 ### Task 1: Product research
-Write `docs/research/products/<app>.md` for vectorcraft, deckcraft, photocraft, pdfcraft,
-designcraft, plus `docs/research/products/README.md` (comparison matrix). For each:
+Write `src_docs/md/research/products/<app>.md` for vectorcraft, deckcraft, photocraft, pdfcraft,
+designcraft, plus `src_docs/md/research/products/README.md` (comparison matrix). For each:
 read/write formats; CLI subcommands and flags (from `<app>-cli --help` and
 `<app>-cli commands`); MCP tools (from source / `tools/list`); Rust crates that are
 bindable (engine/format/model/render/pdf) vs not (ui, mcp, automation); key command ids
 for open/save/export/page ops; native file format; gaps vs the reference product.
 Also summarise lessons from `../vendors/pydoccraft`, `../vendors/craft-suite-api`,
-`../vendors/artcraft-in-a-box` in `docs/research/vendors.md`.
+`../vendors/artcraft-in-a-box` in `src_docs/md/research/vendors.md`.
 
 ### Task 2: Native-format library research
-Write `docs/research/native-libs.md`: candidates for pdf, svg, psd, pptx, docx, xlsx
+Write `src_docs/md/research/native-libs.md`: candidates for pdf, svg, psd, pptx, docx, xlsx
 (Rust with Python bindings preferred, then pure Python). Per lib: license, maintenance
 (last release, stars), Python wheels, bundled native deps, read/write capabilities. End
 with a selection table for the MVP and rationale.
@@ -56,7 +56,7 @@ a specialist engine, video keyframes ↔ slides), package layout of the repo and
 Based on Tasks 1–2.
 
 ### Task 4: Agent framework
-Update `AGENTS.md` and write `docs/workflow.md`: how work is delegated (codex relay,
+Update `AGENTS.md` and write `src_docs/md/workflow.md`: how work is delegated (codex relay,
 claude subagents, max two concurrent), review gates, test commands, release steps.
 
 ### Task 5: Scaffold
@@ -94,15 +94,15 @@ Quality gate (slop clean, verification, code review), README/CHANGELOG, push to 
 #### Publication recovery (done 2026-11-04)
 
 All six projects have verified `0.1.2` wheels and sdists on PyPI (steps 1–3 done;
-see `docs/handoffs/pypi-0.1.2-status-20261104.json`). Step 4 completed 2026-11-07:
+see `src_docs/md/handoffs/pypi-0.1.2-status-20261104.json`). Step 4 completed 2026-11-07:
 all five CLI bundles and native binding are published; core/engines 0.1.3 exposes
 the `all` extras. All eighteen new-release files are hash-verified, and an isolated
 PyPI-only `mcruft[all]==0.1.3` install passed on macOS arm64. Evidence is in
-`docs/handoffs/pypi-0.1.3-status-20261107.json`, `pypi-binary-status-20261107.json`
+`src_docs/md/handoffs/pypi-0.1.3-status-20261107.json`, `pypi-binary-status-20261107.json`
 and `pypi-all-install-20261107.json` in that directory. `TODO.md` is complete.
 
 1. Preview `tools/resume_publish.py --dist .cache/publish-resume-0.1.2` and
-   compare the preserved artifact hashes with `docs/handoffs/pypi-0.1.2-artifacts.json`.
+   compare the preserved artifact hashes with `src_docs/md/handoffs/pypi-0.1.2-artifacts.json`.
 2. With credentials loaded privately, make one `--publish` attempt. Respect 429
    and any server retry deadline; never bump versions or change identities for quota.
 3. Verify all twelve files against PyPI hashes, then perform an isolated registry
@@ -110,3 +110,12 @@ and `pypi-all-install-20261107.json` in that directory. `TODO.md` is complete.
 4. Treat the root-install and `all`-extra changes as a separate future stable release:
    audit current edits, complete binary licences and platform checks, publish all
    native/binary dependencies, and verify `mcruft[all]` in an isolated environment.
+
+## Documentation and v1.0.0 release (2026-11-07)
+
+Preserve the original docs under src_docs/md. Add a complete user-facing guide, API,
+package/route reference and explanations. Configure locked ProperDocs/MaterialX builds
+into docs on every main push and deploy Pages. Give all twelve PyPI distributions
+readable Markdown descriptions and URLs. Release all twelve at 1.0.0, retaining upstream
+CLI version provenance and licences. Verify archive metadata, published hashes, isolated
+installation, native/CLI runtime behavior and live desktop/mobile navigation/search.
