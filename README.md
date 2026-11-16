@@ -112,8 +112,11 @@ CLI bundles have separate builders. See the
 
 Documentation source is `src_docs/md`, configured by `src_docs/mkdocs.yml`.
 Pushes to main build ProperDocs + MaterialX into `docs/` and deploy GitHub Pages.
-Release tags use hatch-vcs; `./release.sh [patch|minor|major]` gates and releases
-through gitnextver. Publication requires configured credentials.
+Release tags use hatch-vcs. `./release.sh [patch|minor|major]` stamps the changelog and
+pushes a tag; `./publish.sh [vX.Y.Z]` asks the release workflow to create it. Either way
+GitHub Actions builds the six packages, cuts the GitHub release and publishes to PyPI
+through trusted publishing (no token). `./publish-binary.sh <package>` releases a
+`-bin` or native wheel built on this Mac.
 
 Licence: Apache-2.0. Bundled upstream code retains its own licences and attribution.
 Product names describe the engines mcruft drives; they do not imply affiliation.

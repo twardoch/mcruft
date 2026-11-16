@@ -1,0 +1,69 @@
+# this_file: .github/workflows/binaries.yml
+# Publishes a locally built binary wheel (mcruft-<product>-bin or mcruft-pdfcraft-native)
+# to pypi.org through Trusted Publishing. The wheel arrives as an asset of a *draft*
+# GitHub release made by ./publish-binary.sh; drafts create no git tag, so hatch-vcs
+# versions of the pure packages are untouched. The draft is deleted after upload.
+name: Publish binary wheel
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Draft release tag, e.g. mcruft-deckcraft-bin-v1.0.1"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: binaries-${{ inputs.release }}
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE: ${{ inputs.release }}
+        run: |
+          if [[ ! "$RELEASE" =~ ^mcruft-(deckcraft|designcraft|pdfcraft|photocraft|vectorcraft)-bin-v[0-9]+\.[0-9]+\.[0-9]+$|^mcruft-pdfcraft-native-v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::'$RELEASE' is not a binary release name"; exit 1
+          fi
+          gh release download "$RELEASE" -R "$GITHUB_REPOSITORY" -p '*.whl' -D dist
+          dist="${RELEASE%-v*}"; ver="${RELEASE##*-v}"
+          ls dist/"${dist//-/_}-$ver"-*.whl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  pypi:
+    needs: fetch
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/user/twardoch/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
+
+  cleanup:
+    needs: pypi
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release delete "${{ inputs.release }}" -R "$GITHUB_REPOSITORY" --yes
