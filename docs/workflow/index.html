@@ -1029,7 +1029,8 @@ an <code>--automation-write-root</code> inside <code>tmp_path</code>.</p>
 <li>Update <code>CHANGELOG.md</code>, tag <code>vX.Y.Z</code> (hatch-vcs derives versions).</li>
 <li><code>uv build --all-packages</code> for the pure wheels; <code>uv run python tools/bundle_cli.py &lt;product&gt;</code> for
    bundled wheels (macOS arm64 only).</li>
-<li>Push to GitHub. PyPI uploads need explicit user authorization (the current release request supplies it); the bundled wheels carry
+<li>Push the tag (or run <code>./publish.sh vX.Y.Z</code>); release.yml publishes to PyPI through
+   trusted publishing. Bundled wheels go through <code>./publish-binary.sh &lt;package&gt;</code>. PyPI uploads need explicit user authorization (the current release request supplies it); the bundled wheels carry
    third-party binaries and need NOTICE review first.</li>
 </ol>
 

@@ -1024,8 +1024,13 @@ Pull requests build without publishing. Generated output is not the editing sour
 <h2 id="releases">Releases<a class="headerlink" href="#releases" title="Permanent link">&para;</a></h2>
 <p>The six pure-Python packages derive their version from Git tags through hatch-vcs.
 <code>./release.sh major</code> runs the gates, stamps the changelog and uses gitnextver to commit,
-tag and push. <code>./publish.sh</code> builds and publishes a tagged release; a tag push also triggers
-the hosted release workflow when its PyPI token is configured.</p>
+tag and push. <code>./publish.sh [vX.Y.Z]</code> dispatches the release workflow, which creates the tag.
+Either tag runs <code>.github/workflows/release.yml</code>: gates, build, GitHub release, then PyPI
+through trusted publishing (OIDC, no token).</p>
+<p>The <code>-bin</code> and native wheels are built locally (macOS arm64). <code>./publish-binary.sh &lt;package&gt;
+[version]</code> builds one, attaches it to a draft GitHub release and dispatches
+<code>.github/workflows/binaries.yml</code>, which uploads it to PyPI and deletes the draft. Drafts
+create no Git tag, so hatch-vcs versions stay clean.</p>
 <p>To release all twelve distributions, prepare the five licensed CLI bundles using
 <code>tools/bundle_cli.py --version 1.0.0</code>, and build the native binding with maturin on macOS
 arm64. Package versions can differ from the embedded upstream CLI version, recorded in
